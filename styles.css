@@ -391,3 +391,23 @@ a  { color: var(--green); }
   .header-cta .phone-link { display: none; }
   .trust-items { flex-direction: column; gap: 0.4rem; }
 }
+
+/* ---------- floating dandelion seeds (hero) ---------- */
+.hero { position: relative; overflow: hidden; }
+.hero .container { position: relative; z-index: 1; }
+.seeds { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.seed {
+  position: absolute; left: -70px; will-change: transform;
+  animation: seed-drift var(--dur, 20s) linear var(--delay, 0s) infinite;
+  opacity: var(--o, 0.6);
+}
+.seed svg { display: block; animation: seed-sway var(--sway, 5s) ease-in-out infinite alternate; }
+@keyframes seed-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(100vw + 150px)); }
+}
+@keyframes seed-sway {
+  from { transform: translateY(-16px) rotate(-14deg); }
+  to   { transform: translateY(16px) rotate(12deg); }
+}
+@media (prefers-reduced-motion: reduce) { .seed { display: none; } }

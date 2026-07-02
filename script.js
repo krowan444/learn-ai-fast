@@ -47,3 +47,37 @@ if (form) {
     if (ok) ok.style.display = "block";
   });
 }
+
+/* ---- Floating dandelion seeds in the hero ---- */
+const seedHost = document.querySelector(".seeds");
+if (seedHost) {
+  const SEED_W = 26, SEED_H = 34;
+  const SEED_SVG =
+    '<svg viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<g stroke="#b9a77a" stroke-width="1.1" stroke-linecap="round">' +
+    '<line x1="13" y1="14" x2="13" y2="27"/>' +
+    '<line x1="13" y1="14" x2="4" y2="4"/>' +
+    '<line x1="13" y1="14" x2="9" y2="2"/>' +
+    '<line x1="13" y1="14" x2="13" y2="1"/>' +
+    '<line x1="13" y1="14" x2="17" y2="2"/>' +
+    '<line x1="13" y1="14" x2="22" y2="4"/>' +
+    '<line x1="13" y1="14" x2="6" y2="9"/>' +
+    '<line x1="13" y1="14" x2="20" y2="9"/>' +
+    '</g><circle cx="13" cy="29" r="2.2" fill="#a68d55"/></svg>';
+  for (let i = 0; i < 12; i++) {
+    const s = document.createElement("div");
+    s.className = "seed";
+    s.innerHTML = SEED_SVG;
+    const dur = 14 + Math.random() * 18;           // 14–32s to cross
+    s.style.setProperty("--dur", dur.toFixed(1) + "s");
+    s.style.setProperty("--delay", (-Math.random() * dur).toFixed(1) + "s"); // start mid-flight
+    s.style.setProperty("--sway", (3.5 + Math.random() * 3).toFixed(1) + "s");
+    s.style.setProperty("--o", (0.3 + Math.random() * 0.45).toFixed(2));
+    s.style.top = (4 + Math.random() * 82).toFixed(1) + "%";
+    const scale = 0.55 + Math.random() * 0.95;
+    const svg = s.querySelector("svg");
+    svg.setAttribute("width", Math.round(SEED_W * scale));
+    svg.setAttribute("height", Math.round(SEED_H * scale));
+    seedHost.appendChild(s);
+  }
+}
