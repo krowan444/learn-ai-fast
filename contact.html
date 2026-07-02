@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Learn AI Fast</title>
+  <meta name="description" content="Book a friendly AI session. Leave your details and Kieran will get back to you to arrange a calm, friendly 1-to-1 session." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">Learn <span>AI</span> Fast</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/lessons">1-to-1 AI Lessons</a>
+      <a href="/talks">AI Safety Group Talks</a>
+      <a href="/protect">Second Look Protect</a>
+      <a href="/contact" class="active">Contact</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-gold js-book" href="/contact">Book a Session</a>
+      <a class="phone-link" href="tel:07563887804">📞 07563 887804</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container">
+      <h1>Book a friendly <span class="accent-gold">AI session</span></h1>
+      <p>Leave your details below and I’ll get back to you to arrange a calm,
+         friendly 1-to-1 Zoom session.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-wrap">
+      <form id="contactForm" class="contact-form">
+        <div>
+          <label for="firstName">First Name</label>
+          <input id="firstName" name="firstName" type="text" required autocomplete="given-name" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold">Request a Friendly AI Session</button>
+        <p class="form-note">Sending opens your email app with the message ready to go.
+           Prefer to talk? Call <a href="tel:07563887804">07563 887804</a>.</p>
+        <p class="form-success">Thanks — I’ll be in touch shortly.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="brand" href="/">Learn <span>AI</span> Fast</a>
+    <nav class="footer-nav">
+      <a href="/">Home</a>
+      <a href="/lessons">1-to-1 AI Lessons</a>
+      <a href="/talks">AI Safety Group Talks</a>
+      <a href="/protect">Second Look Protect</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+    </nav>
+    <p class="footer-meta">📞 <a href="tel:07563887804" style="color:inherit">07563 887804</a> ·
+       Northampton &amp; Zoom · © 2026 Learn AI Fast</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
