@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contact — Learn AI Fast</title>
-  <meta name="description" content="Book a friendly AI session. Leave your details and Kieran will get back to you to arrange a calm, friendly 1-to-1 session." />
+  <title>60-Minute AI Confidence Session — Learn AI Fast</title>
+  <meta name="description" content="60-Minute AI Confidence Session with Learn AI Fast. Friendly one-to-one AI guidance on Zoom or in person." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -17,10 +17,10 @@
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     <nav class="site-nav">
       <a href="/">Home</a>
-      <a href="/lessons">1-to-1 AI Lessons</a>
+      <a href="/lessons" class="active">1-to-1 AI Lessons</a>
       <a href="/talks">AI Safety Group Talks</a>
       <a href="/protect">Second Look Protect</a>
-      <a href="/contact" class="active">Contact</a>
+      <a href="/contact">Contact</a>
       <a href="/about">About</a>
     </nav>
     <div class="header-cta">
@@ -31,34 +31,35 @@
 </header>
 
 <main>
-  <section class="page-hero">
+  <section class="page-hero lesson-detail-hero">
     <div class="container">
-      <h1>Book a friendly <span class="accent-gold">AI session</span></h1>
-      <p>Leave your details below and I’ll get back to you to arrange a calm,
-         friendly 1-to-1 Zoom session.</p>
+      <p class="kicker">A calm first step into AI</p>
+      <h1>60-Minute AI Confidence Session</h1>
+      <p><strong>£79.99</strong> · Beginner-Friendly · Zoom or Northampton</p>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container contact-wrap">
-      <form id="contactForm" class="contact-form">
-        <div>
-          <label for="firstName">First Name</label>
-          <input id="firstName" name="firstName" type="text" required autocomplete="given-name" />
+  <section class="section lesson-detail-section">
+    <div class="container lesson-detail-grid">
+      <div class="lesson-detail-image">
+        <img src="assets/ai-confidence-session.png" alt="60-Minute AI Confidence Session" />
+      </div>
+      <div class="lesson-detail-copy">
+        <p class="kicker">What you get</p>
+        <h2>60-Minute AI Confidence Session</h2>
+        <p>A friendly one-to-one session for complete beginners or anyone who wants to feel more confident using AI in everyday life.</p>
+        <ul class="detail-list">
+          <li>Understand what AI is and how it can help you in plain English.</li>
+          <li>Try simple real-life examples at your own pace.</li>
+          <li>Ask anything, with no jargon and no pressure.</li>
+          <li>Leave with next steps you can use straight away.</li>
+        </ul>
+        <div class="detail-callout">
+          <strong>Best fit:</strong> Perfect if you are curious, cautious, or starting from scratch and want a simple guided introduction.
         </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required autocomplete="email" />
-        </div>
-        <div>
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-gold">Request a Friendly AI Session</button>
-        <p class="form-note">Sending opens your email app with the message ready to go.
-           Prefer to talk? Call <a href="tel:07563887804">07563 887804</a>.</p>
-        <p class="form-success">Thanks — I’ll be in touch shortly.</p>
-      </form>
+        <a class="btn btn-gold js-book detail-buy" href="/contact">Buy Now - Book Your Zoom Call</a>
+        <p class="detail-note">Calendar booking and Stripe payment can be connected later. For now, this button starts the booking request.</p>
+      </div>
     </div>
   </section>
 </main>
