@@ -3,7 +3,7 @@
    EDIT THESE TWO LINES after you set up Calendly:
    ========================================================== */
 const CALENDLY_URL = "REPLACE-WITH-YOUR-CALENDLY-LINK"; // e.g. https://calendly.com/kieran-learnaifast/60min
-const CONTACT_EMAIL = "kierandrowan@gmail.com";
+const CONTACT_EMAIL = "hello@learnaifast.co.uk";
 
 /* ---- Booking buttons ----
    Every element with class "js-book" points to Calendly once
@@ -28,23 +28,39 @@ if (toggle && nav) {
   });
 }
 
-/* ---- Contact form (no backend needed — opens the visitor's
-        email app with the message pre-filled) ---- */
+/* ---- Contact form — submits directly to the Learn AI Fast
+        enquiry service (Supabase Edge Function). ---- */
+const ENQUIRY_URL = "https://sktwwjvbpaqvmokhnjeh.supabase.co/functions/v1/enquiry";
+
 const form = document.querySelector("#contactForm");
 if (form) {
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const btn = form.querySelector("button[type=submit]");
+    const ok = document.querySelector(".form-success");
     const name = form.firstName.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
-    const subject = encodeURIComponent("Friendly AI session request from " + name);
-    const body = encodeURIComponent(
-      "Name: " + name + "\nEmail: " + email + "\n\n" + message
-    );
-    window.location.href =
-      "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
-    const ok = document.querySelector(".form-success");
-    if (ok) ok.style.display = "block";
+    if (!name || !email || !message) return;
+
+    btn.disabled = true;
+    const oldLabel = btn.textContent;
+    btn.textContent = "Sending…";
+    try {
+      const res = await fetch(ENQUIRY_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName: name, email, message }),
+      });
+      if (!res.ok) throw new Error("Send failed");
+      form.reset();
+      btn.textContent = "Sent ✓";
+      if (ok) ok.style.display = "block";
+    } catch (err) {
+      btn.textContent = oldLabel;
+      btn.disabled = false;
+      alert("Sorry — something went wrong sending your message. Please try again, or email " + CONTACT_EMAIL + " directly.");
+    }
   });
 }
 
