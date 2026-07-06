@@ -2,7 +2,7 @@
    Learn AI Fast — site settings + behaviour
    EDIT THESE TWO LINES after you set up Calendly:
    ========================================================== */
-const CALENDLY_URL = "REPLACE-WITH-YOUR-CALENDLY-LINK"; // e.g. https://calendly.com/kieran-learnaifast/60min
+const CALENDLY_URL = "https://cal.com/kieran-rowan-tiujdp"; // Cal.com booking page (Stripe payments enabled)
 const CONTACT_EMAIL = "hello@learnaifast.co.uk";
 
 /* ---- Booking buttons ----
