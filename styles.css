@@ -348,6 +348,8 @@ a  { color: var(--green); }
 
 .hero h1 { margin-bottom: 1.1rem; }
 
+.hero-copy { transform: translateY(-3rem); }
+
 .hero-copy p { max-width: 52ch; }
 
 .hero-actions { display: flex; gap: 0.9rem; margin-top: 1.6rem; flex-wrap: wrap; }
