@@ -41,6 +41,8 @@ if (form) {
     const name = form.firstName.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
+    const context = form.dataset.enquiryContext;
+    const fullMessage = context ? `${context}\n\n${message}` : message;
     if (!name || !email || !message) return;
 
     btn.disabled = true;
@@ -50,7 +52,7 @@ if (form) {
       const res = await fetch(ENQUIRY_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstName: name, email, message }),
+        body: JSON.stringify({ firstName: name, email, message: fullMessage }),
       });
       if (!res.ok) throw new Error("Send failed");
       form.reset();
@@ -96,6 +98,52 @@ if (seedHost) {
     svg.setAttribute("height", Math.round(SEED_H * scale));
     seedHost.appendChild(s);
   }
+}
+
+/* ---- Idea seeds drifting out from the hero character ---- */
+const mindSeedHost = document.querySelector(".mind-seeds");
+if (mindSeedHost) {
+  const MIND_SEED_SVG =
+    '<svg viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<g stroke="#b9a77a" stroke-width="1.1" stroke-linecap="round">' +
+    '<line x1="13" y1="14" x2="13" y2="27"/>' +
+    '<line x1="13" y1="14" x2="4" y2="4"/>' +
+    '<line x1="13" y1="14" x2="9" y2="2"/>' +
+    '<line x1="13" y1="14" x2="13" y2="1"/>' +
+    '<line x1="13" y1="14" x2="17" y2="2"/>' +
+    '<line x1="13" y1="14" x2="22" y2="4"/>' +
+    '<line x1="13" y1="14" x2="6" y2="9"/>' +
+    '<line x1="13" y1="14" x2="20" y2="9"/>' +
+    '</g><circle cx="13" cy="29" r="2.2" fill="#a68d55"/></svg>';
+
+  const paths = [
+    { x1: "-0.5vw", y1: "-8vh", x2: "-8vw", y2: "-20vh", x3: "-25vw", y3: "-14vh", x4: "-54vw", y4: "0vh", x: "-86vw", y: "18vh", delay: "0s", size: 27 },
+    { x1: "0vw", y1: "-9vh", x2: "-2vw", y2: "-23vh", x3: "-15vw", y3: "-31vh", x4: "-36vw", y4: "-27vh", x: "-70vw", y: "-24vh", delay: "3.2s", size: 25 },
+    { x1: "0.5vw", y1: "-9vh", x2: "4vw", y2: "-24vh", x3: "-4vw", y3: "-34vh", x4: "-16vw", y4: "-25vh", x: "-34vw", y: "-5vh", delay: "6.4s", size: 26 },
+    { x1: "0.8vw", y1: "-9vh", x2: "10vw", y2: "-21vh", x3: "29vw", y3: "-21vh", x4: "58vw", y4: "-12vh", x: "88vw", y: "-4vh", delay: "9.6s", size: 25 },
+    { x1: "0.5vw", y1: "-9vh", x2: "14vw", y2: "-17vh", x3: "37vw", y3: "-1vh", x4: "64vw", y4: "18vh", x: "90vw", y: "36vh", delay: "12.8s", size: 27 },
+    { x1: "-0.8vw", y1: "-9vh", x2: "-13vw", y2: "-16vh", x3: "-35vw", y3: "-1vh", x4: "-64vw", y4: "18vh", x: "-90vw", y: "38vh", delay: "16s", size: 25 },
+    { x1: "0vw", y1: "-9vh", x2: "2vw", y2: "-25vh", x3: "13vw", y3: "-36vh", x4: "26vw", y4: "-30vh", x: "42vw", y: "-38vh", delay: "19.2s", size: 26 }
+  ];
+
+  paths.forEach((path) => {
+    const seed = document.createElement("span");
+    seed.className = "mind-seed";
+    seed.innerHTML = MIND_SEED_SVG;
+    seed.style.setProperty("--x1", path.x1);
+    seed.style.setProperty("--y1", path.y1);
+    seed.style.setProperty("--x2", path.x2);
+    seed.style.setProperty("--y2", path.y2);
+    seed.style.setProperty("--x3", path.x3);
+    seed.style.setProperty("--y3", path.y3);
+    seed.style.setProperty("--x4", path.x4);
+    seed.style.setProperty("--y4", path.y4);
+    seed.style.setProperty("--x", path.x);
+    seed.style.setProperty("--y", path.y);
+    seed.style.setProperty("--delay", path.delay);
+    seed.style.setProperty("--size", path.size + "px");
+    mindSeedHost.appendChild(seed);
+  });
 }
 
 

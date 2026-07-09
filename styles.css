@@ -155,7 +155,7 @@ a  { color: var(--green); }
 
 .header-inner {
   display: grid;
-  grid-template-columns: minmax(310px, 0.72fr) minmax(610px, auto) minmax(150px, 0.5fr);
+  grid-template-columns: minmax(270px, 0.55fr) minmax(610px, auto) minmax(220px, 0.65fr);
   align-items: center;
   gap: clamp(0.55rem, 1.35vw, 1.1rem);
   min-height: 72px;
@@ -339,7 +339,7 @@ a  { color: var(--green); }
 }
 
 /* ---------- hero ---------- */
-.hero { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+.hero { padding: clamp(1.8rem, 4.7vw, 3.25rem) 0 clamp(2.5rem, 6vw, 4.5rem); }
 
 .hero-grid {
   display: grid; grid-template-columns: 1.15fr 0.85fr;
@@ -348,7 +348,7 @@ a  { color: var(--green); }
 
 .hero h1 { margin-bottom: 1.1rem; }
 
-.hero-copy { transform: translateY(-3rem); }
+.hero-copy { transform: translateY(-2.75rem); }
 
 .hero-copy p { max-width: 52ch; }
 
@@ -359,6 +359,7 @@ a  { color: var(--green); }
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  transform: translateY(1.25rem);
 }
 .hero-figure > img {
   width: 100%; height: auto; border-radius: 24px;
@@ -786,20 +787,68 @@ a  { color: var(--green); }
 }
 @media (max-width: 900px) { .hero-zen { display: none; } }
 
-/* seeds pop out of the head and drift away */
-.zseed {
-  opacity: 0;
-  animation: zseed-fly 8s ease-out infinite;
-  animation-delay: var(--d, 0s);
+/* idea seeds drift slowly from behind the character's head */
+.mind-seeds {
+  position: absolute;
+  top: calc(6% + clamp(78px, 7.8vw, 123px));
+  left: 47%;
+  width: 0;
+  height: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
 }
-@keyframes zseed-fly {
-  0%   { transform: translate(180px, 82px) scale(0.1); opacity: 0; }
-  6%   { opacity: 0.9; transform: translate(calc(180px + (var(--tx) - 180px) * 0.12), calc(82px + (var(--ty) - 82px) * 0.12)) scale(0.55); }
-  60%  { opacity: 0.85; transform: translate(var(--tx), var(--ty)) scale(1); }
-  100% { opacity: 0; transform: translate(calc(var(--tx) + 14px), calc(var(--ty) - 30px)) scale(1); }
+.mind-seed {
+  position: absolute;
+  width: var(--size, 20px);
+  height: auto;
+  opacity: 0;
+  transform-origin: center;
+  animation: mind-seed-flow 38s cubic-bezier(0.18, 0.78, 0.22, 1) var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+.mind-seed svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: mind-seed-sway 5.8s ease-in-out infinite alternate;
+}
+@keyframes mind-seed-flow {
+  0%, 13% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.06) rotate(0deg);
+  }
+  18% {
+    opacity: 0.42;
+    transform: translate(calc(-50% + var(--x1)), calc(-50% + var(--y1))) scale(0.62) rotate(0deg);
+  }
+  32% {
+    opacity: 0.72;
+    transform: translate(calc(-50% + var(--x2)), calc(-50% + var(--y2))) scale(0.8) rotate(2deg);
+  }
+  54% {
+    opacity: 0.64;
+    transform: translate(calc(-50% + var(--x3)), calc(-50% + var(--y3))) scale(0.9) rotate(-3deg);
+  }
+  78% {
+    opacity: 0.48;
+    transform: translate(calc(-50% + var(--x4)), calc(-50% + var(--y4))) scale(0.86) rotate(3deg);
+  }
+  94% {
+    opacity: 0.18;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.78) rotate(-2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.72) rotate(0deg);
+  }
+}
+@keyframes mind-seed-sway {
+  from { transform: translate(-6px, -10px) rotate(-4deg); }
+  to   { transform: translate(7px, 10px) rotate(4deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .zseed { animation: none; opacity: 0.85; transform: translate(var(--tx), var(--ty)); }
+  .mind-seed { display: none; }
 }
 
 /* ---------- floating dandelion seeds (hero) ---------- */
