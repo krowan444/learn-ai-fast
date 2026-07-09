@@ -339,7 +339,13 @@ a  { color: var(--green); }
 }
 
 /* ---------- hero ---------- */
-.hero { padding: clamp(1.8rem, 4.7vw, 3.25rem) 0 clamp(2.5rem, 6vw, 4.5rem); }
+.hero {
+  padding: clamp(1.8rem, 4.7vw, 3.25rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  background-image: url("assets/hero-full-kieran.png");
+  background-repeat: no-repeat;
+  background-position: right 42%;
+  background-size: 100% auto;
+}
 
 .hero-grid {
   display: grid; grid-template-columns: 1.15fr 0.85fr;
@@ -348,7 +354,7 @@ a  { color: var(--green); }
 
 .hero h1 { margin-bottom: 1.1rem; }
 
-.hero-copy { transform: translateY(-2.75rem); }
+.hero-copy { position: relative; z-index: 3; transform: translateY(-0.65rem); }
 
 .hero-copy p { max-width: 52ch; }
 
@@ -364,6 +370,20 @@ a  { color: var(--green); }
 .hero-figure > img {
   width: 100%; height: auto; border-radius: 24px;
   box-shadow: var(--shadow);
+}
+
+.hero-figure-full {
+  z-index: 1;
+  min-height: clamp(420px, 42vw, 560px);
+  margin-left: clamp(-16rem, -15vw, -7rem);
+  margin-right: clamp(-12rem, -10vw, -4rem);
+}
+.hero-figure-full > img {
+  display: none;
+}
+.hero-figure-full .badge-stack,
+.hero-figure-full .review-chip {
+  display: none;
 }
 
 .badge-stack {
@@ -723,6 +743,8 @@ a  { color: var(--green); }
   .hero-grid, .about-grid { grid-template-columns: 1fr; }
   .approach ul { grid-template-columns: 1fr; }
   .hero-figure { max-width: 420px; margin-inline: auto; }
+  .hero-figure-full { max-width: min(100%, 680px); margin-inline: auto; }
+  .hero-figure-full { min-height: clamp(260px, 50vw, 380px); }
   .cards-3, .steps, .price-grid, .lesson-option-grid, .lesson-detail-grid { grid-template-columns: 1fr; }
   .fit-grid { grid-template-columns: 1fr; }
   .lesson-option-card img { max-height: none; }
@@ -777,11 +799,11 @@ a  { color: var(--green); }
 .hero-zen {
   position: absolute;
   top: 6%;
-  left: 47%;
+  left: 45%;
   transform: translateX(-50%);
   width: clamp(190px, 19vw, 300px);
   height: auto;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   opacity: 0.25;
 }
@@ -791,10 +813,10 @@ a  { color: var(--green); }
 .mind-seeds {
   position: absolute;
   top: calc(6% + clamp(78px, 7.8vw, 123px));
-  left: 47%;
+  left: 45%;
   width: 0;
   height: 0;
-  z-index: 0;
+  z-index: 2;
   pointer-events: none;
   overflow: visible;
 }
