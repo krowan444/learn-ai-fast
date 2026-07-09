@@ -66,9 +66,8 @@ if (form) {
   });
 }
 
-/* ---- Floating dandelion seeds in the hero ---- */
-const seedHost = document.querySelector(".seeds");
-if (seedHost) {
+/* ---- Floating dandelion seeds (hero + any .seeds layer) ---- */
+document.querySelectorAll(".seeds").forEach((seedHost) => {
   const SEED_W = 26, SEED_H = 34;
   const SEED_SVG =
     '<svg viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">' +
@@ -90,60 +89,114 @@ if (seedHost) {
     s.style.setProperty("--dur", dur.toFixed(1) + "s");
     s.style.setProperty("--delay", (-Math.random() * dur).toFixed(1) + "s"); // start mid-flight
     s.style.setProperty("--sway", (3.5 + Math.random() * 3).toFixed(1) + "s");
-    s.style.setProperty("--o", (0.3 + Math.random() * 0.45).toFixed(2));
-    s.style.top = (4 + Math.random() * 82).toFixed(1) + "%";
-    const scale = 0.55 + Math.random() * 0.95;
+    s.style.setProperty("--o", (0.2 + Math.random() * 0.3).toFixed(2));
+    /* placement depends on drift direction:
+       vertical drifts spread across the width; horizontal drifts
+       spread down the height (hero keeps to its bottom half) */
+    if (seedHost.classList.contains("seeds-up") || seedHost.classList.contains("seeds-down")) {
+      s.style.left = (4 + Math.random() * 92).toFixed(1) + "%";
+    } else if (
+      seedHost.classList.contains("seeds-rtl") ||
+      seedHost.classList.contains("seeds-diag") ||
+      seedHost.classList.contains("seeds-diag-flip")
+    ) {
+      s.style.top = (8 + Math.random() * 78).toFixed(1) + "%";
+    } else {
+      s.style.top = (52 + Math.random() * 40).toFixed(1) + "%";
+    }
+    const scale = 0.35 + Math.random() * 0.4;                 // small, subtle
     const svg = s.querySelector("svg");
     svg.setAttribute("width", Math.round(SEED_W * scale));
     svg.setAttribute("height", Math.round(SEED_H * scale));
     seedHost.appendChild(s);
   }
-}
+});
 
 /* ---- Idea seeds drifting out from the hero character ---- */
 const mindSeedHost = document.querySelector(".mind-seeds");
 if (mindSeedHost) {
+  /* a realistic dandelion seed: a fine umbrella of pappus filaments,
+     a long thin beak, and a slender seed body at the bottom */
   const MIND_SEED_SVG =
-    '<svg viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-    '<g stroke="#b9a77a" stroke-width="1.1" stroke-linecap="round">' +
-    '<line x1="13" y1="14" x2="13" y2="27"/>' +
-    '<line x1="13" y1="14" x2="4" y2="4"/>' +
-    '<line x1="13" y1="14" x2="9" y2="2"/>' +
-    '<line x1="13" y1="14" x2="13" y2="1"/>' +
-    '<line x1="13" y1="14" x2="17" y2="2"/>' +
-    '<line x1="13" y1="14" x2="22" y2="4"/>' +
-    '<line x1="13" y1="14" x2="6" y2="9"/>' +
-    '<line x1="13" y1="14" x2="20" y2="9"/>' +
-    '</g><circle cx="13" cy="29" r="2.2" fill="#a68d55"/></svg>';
+    '<svg viewBox="0 0 26 37" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    /* pappus — a full starburst of filaments around the stalk tip */
+    '<g stroke="#d3bf92" stroke-width="0.7" stroke-linecap="round">' +
+    '<line x1="13" y1="11" x2="13" y2="1"/>' +
+    '<line x1="13" y1="11" x2="17.1" y2="1.9"/>' +
+    '<line x1="13" y1="11" x2="20.4" y2="4.3"/>' +
+    '<line x1="13" y1="11" x2="22.5" y2="7.9"/>' +
+    '<line x1="13" y1="11" x2="22.9" y2="12"/>' +
+    '<line x1="13" y1="11" x2="21.7" y2="16"/>' +
+    '<line x1="13" y1="11" x2="18.9" y2="19.1"/>' +
+    '<line x1="13" y1="11" x2="15.1" y2="20.8"/>' +
+    '<line x1="13" y1="11" x2="10.9" y2="20.8"/>' +
+    '<line x1="13" y1="11" x2="7.1" y2="19.1"/>' +
+    '<line x1="13" y1="11" x2="4.3" y2="16"/>' +
+    '<line x1="13" y1="11" x2="3.1" y2="12"/>' +
+    '<line x1="13" y1="11" x2="3.5" y2="7.9"/>' +
+    '<line x1="13" y1="11" x2="5.6" y2="4.3"/>' +
+    '<line x1="13" y1="11" x2="8.9" y2="1.9"/>' +
+    '</g>' +
+    /* inner, shorter filaments for fluffy density */
+    '<g stroke="#d3bf92" stroke-width="0.6" stroke-linecap="round" opacity="0.6">' +
+    '<line x1="13" y1="11" x2="8" y2="6.5"/>' +
+    '<line x1="13" y1="11" x2="18" y2="6.5"/>' +
+    '<line x1="13" y1="11" x2="19" y2="13.5"/>' +
+    '<line x1="13" y1="11" x2="7" y2="13.5"/>' +
+    '<line x1="13" y1="11" x2="13" y2="17.5"/>' +
+    '</g>' +
+    '<circle cx="13" cy="11" r="0.9" fill="#c9a24a" stroke="none"/>' +
+    /* beak — the long thin stalk */
+    '<line x1="13" y1="11" x2="13" y2="28" stroke="#c9a24a" stroke-width="0.9"/>' +
+    /* seed body with tiny bristles at its top */
+    '<path d="M11.9 28.2 l-1.3 -1.3 M14.1 28.2 l1.3 -1.3" stroke="#a67c2e" stroke-width="0.6" stroke-linecap="round"/>' +
+    '<ellipse cx="13" cy="30.8" rx="1.3" ry="3" fill="#a67c2e" stroke="none"/>' +
+    '</svg>';
 
-  const paths = [
-    { x1: "-0.5vw", y1: "-8vh", x2: "-8vw", y2: "-20vh", x3: "-25vw", y3: "-14vh", x4: "-54vw", y4: "0vh", x: "-86vw", y: "18vh", delay: "0s", size: 27 },
-    { x1: "0vw", y1: "-9vh", x2: "-2vw", y2: "-23vh", x3: "-15vw", y3: "-31vh", x4: "-36vw", y4: "-27vh", x: "-70vw", y: "-24vh", delay: "3.2s", size: 25 },
-    { x1: "0.5vw", y1: "-9vh", x2: "4vw", y2: "-24vh", x3: "-4vw", y3: "-34vh", x4: "-16vw", y4: "-25vh", x: "-34vw", y: "-5vh", delay: "6.4s", size: 26 },
-    { x1: "0.8vw", y1: "-9vh", x2: "10vw", y2: "-21vh", x3: "29vw", y3: "-21vh", x4: "58vw", y4: "-12vh", x: "88vw", y: "-4vh", delay: "9.6s", size: 25 },
-    { x1: "0.5vw", y1: "-9vh", x2: "14vw", y2: "-17vh", x3: "37vw", y3: "-1vh", x4: "64vw", y4: "18vh", x: "90vw", y: "36vh", delay: "12.8s", size: 27 },
-    { x1: "-0.8vw", y1: "-9vh", x2: "-13vw", y2: "-16vh", x3: "-35vw", y3: "-1vh", x4: "-64vw", y4: "18vh", x: "-90vw", y: "38vh", delay: "16s", size: 25 },
-    { x1: "0vw", y1: "-9vh", x2: "2vw", y2: "-25vh", x3: "13vw", y3: "-36vh", x4: "26vw", y4: "-30vh", x: "42vw", y: "-38vh", delay: "19.2s", size: 26 }
-  ];
+  /* Each seed grows at his head, floats up a little, and the moment it
+     leaves, the next one is born below it. They alternate direction:
+     one sails left across the screen, the next sails right. */
+  const LIFETIME = 22;    // seconds — must match the CSS animation duration
+  const LAUNCH_AT = 0.41; // fraction of the timeline when it floats off
+  let flyDir = 1;         // 1 = right, -1 = left; alternates each birth
 
-  paths.forEach((path) => {
-    const seed = document.createElement("span");
-    seed.className = "mind-seed";
-    seed.innerHTML = MIND_SEED_SVG;
-    seed.style.setProperty("--x1", path.x1);
-    seed.style.setProperty("--y1", path.y1);
-    seed.style.setProperty("--x2", path.x2);
-    seed.style.setProperty("--y2", path.y2);
-    seed.style.setProperty("--x3", path.x3);
-    seed.style.setProperty("--y3", path.y3);
-    seed.style.setProperty("--x4", path.x4);
-    seed.style.setProperty("--y4", path.y4);
-    seed.style.setProperty("--x", path.x);
-    seed.style.setProperty("--y", path.y);
-    seed.style.setProperty("--delay", path.delay);
-    seed.style.setProperty("--size", path.size + "px");
-    mindSeedHost.appendChild(seed);
-  });
+  const spawnSeed = () => {
+    const s = document.createElement("span");
+    s.className = "mind-seed";
+    s.innerHTML = MIND_SEED_SVG;
+    s.style.setProperty("--dir", flyDir);
+    s.style.setProperty("--size", Math.round(22 + Math.random() * 4) + "px");
+    flyDir = -flyDir;
+    /* clean up once its flight finishes */
+    s.addEventListener("animationend", (e) => {
+      if (e.animationName === "mind-seed-flow") s.remove();
+    });
+    mindSeedHost.appendChild(s);
+  };
+
+  /* if the visitor prefers reduced motion the CSS hides the seeds,
+     so don't spawn them at all (they'd pile up unseen) */
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    spawnSeed();
+    setInterval(spawnSeed, LIFETIME * LAUNCH_AT * 1000);
+  }
+}
+
+
+/* ---- He types in bursts, pausing now and then to think ---- */
+const zenFigure = document.querySelector(".hero-zen");
+if (zenFigure && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  (function typingLoop() {
+    zenFigure.classList.add("is-typing");
+    zenFigure.classList.remove("is-thinking");
+    const typeFor = 2400 + Math.random() * 2800;   // type 2.4–5.2s
+    setTimeout(() => {
+      zenFigure.classList.remove("is-typing");
+      zenFigure.classList.add("is-thinking");      // face emotes while he pauses
+      const restFor = 1400 + Math.random() * 2200; // pause 1.4–3.6s, thinking
+      setTimeout(typingLoop, restFor);
+    }, typeFor);
+  })();
 }
 
 

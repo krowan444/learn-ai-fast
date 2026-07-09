@@ -26,7 +26,7 @@
       <a href="/about">About</a>
     </nav>
     <div class="header-cta">
-      <a class="btn btn-gold js-book" href="/contact">Book a Session</a>
+      <a class="btn btn-gold" href="/lessons">Book a Session</a>
       <a class="phone-link" href="tel:07563887804"><span class="phone-icon" aria-hidden="true">☎</span><span>07563 887804</span></a>
     </div>
   </div>
@@ -40,15 +40,23 @@
     <div class="mind-seeds" aria-hidden="true"></div>
     <svg class="hero-zen" aria-hidden="true" viewBox="0 0 360 420" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g stroke="#2b2b2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-        <!-- big round head -->
-        <circle cx="180" cy="148" r="64" stroke-width="4.5" />
-        <!-- closed happy eyes + smile -->
-        <path d="M138 150 q10 9 20 0" stroke-width="4" />
-        <path d="M202 150 q10 9 20 0" stroke-width="4" />
-        <path d="M166 178 q14 10 28 0" stroke-width="4" />
-        <!-- plump body flowing into arms, mitten hands resting on the ground -->
-        <path d="M133 197 C 98 218, 74 252, 66 288 C 62 308, 56 324, 46 334 C 38 342, 44 352, 58 349 C 70 346, 80 338, 86 330" stroke-width="4.5" />
-        <path d="M227 197 C 262 218, 286 252, 294 288 C 298 308, 304 324, 314 334 C 322 342, 316 352, 302 349 C 290 346, 280 338, 274 330" stroke-width="4.5" />
+        <!-- big round head (gently bobs while he thinks) -->
+        <g class="zen-head">
+          <circle cx="180" cy="148" r="64" stroke-width="4.5" />
+          <!-- closed happy eyes + smile -->
+          <path class="zen-eye zen-eye-l" d="M138 150 q10 9 20 0" stroke-width="4" />
+          <path class="zen-eye zen-eye-r" d="M202 150 q10 9 20 0" stroke-width="4" />
+          <path class="zen-mouth" d="M166 178 q14 10 28 0" stroke-width="4" />
+        </g>
+        <!-- arms reaching in behind the laptop, mittens just peeking out the sides -->
+        <g class="zen-arm zen-arm-l">
+          <path d="M133 197 C 100 218, 84 248, 86 285 C 87 305, 90 322, 96 332" stroke-width="4.5" />
+          <ellipse cx="90" cy="331" rx="10" ry="8" fill="#f8f2e5" stroke-width="4" transform="rotate(-15 90 331)" />
+        </g>
+        <g class="zen-arm zen-arm-r">
+          <path d="M227 197 C 260 218, 276 248, 274 285 C 273 305, 270 322, 264 332" stroke-width="4.5" />
+          <ellipse cx="270" cy="331" rx="10" ry="8" fill="#f8f2e5" stroke-width="4" transform="rotate(15 270 331)" />
+        </g>
         <!-- crossed lotus legs: two folded legs overlapping, top one occludes -->
         <path d="M250 336 C 272 342, 286 354, 284 366 C 280 380, 250 388, 210 390 C 170 392, 130 390, 110 384 C 98 380, 96 370, 106 366 C 140 356, 200 344, 250 336 Z"
               fill="#f8f2e5" stroke-width="4.5" />
@@ -57,7 +65,7 @@
         <!-- laptop covering the lower half -->
         <g class="zen-laptop">
           <rect x="94" y="247" width="172" height="104" rx="12" fill="#f8f2e5" stroke-width="4.5" />
-          <circle cx="180" cy="299" r="5" fill="#c9932b" stroke="none" opacity="0.75" />
+          <circle class="zen-light" cx="180" cy="299" r="5" fill="#c9932b" stroke="none" opacity="0.75" />
           <path d="M78 351 H282 L310 376 H50 Z" fill="#efe1c9" stroke-width="4.5" />
         </g>
       </g>
@@ -130,7 +138,8 @@
   </div>
 
   <!-- ============ IS THIS RIGHT FOR YOU ============ -->
-  <section class="section alt">
+  <section class="section alt has-seeds">
+    <div class="seeds seeds-up" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <h2>Is this right for <span class="accent-gold">you?</span></h2>
@@ -149,7 +158,8 @@
   </section>
 
   <!-- ============ HOW IT WORKS ============ -->
-  <section class="section" id="how-it-works">
+  <section class="section has-seeds" id="how-it-works">
+    <div class="seeds seeds-down" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <h2>How it <span class="accent-gold">works</span></h2>
@@ -187,7 +197,8 @@
   </section>
 
   <!-- ============ HI, I'M KIERAN ============ -->
-  <section class="section alt">
+  <section class="section alt about-teaser">
+    <div class="seeds seeds-rtl" aria-hidden="true"></div>
     <div class="container">
       <div class="about-grid">
         <div>
@@ -224,7 +235,8 @@
   </section>
 
   <!-- ============ WHAT YOU'LL LEARN ============ -->
-  <section class="section">
+  <section class="section has-seeds">
+    <div class="seeds seeds-diag" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <h2>What you’ll <span class="accent-gold">actually</span> learn</h2>
@@ -259,7 +271,8 @@
   </section>
 
   <!-- ============ FAQ ============ -->
-  <section class="section alt">
+  <section class="section alt has-seeds">
+    <div class="seeds seeds-diag-flip" aria-hidden="true"></div>
     <div class="container">
       <div class="section-head">
         <h2>FAQs</h2>

@@ -155,11 +155,11 @@ a  { color: var(--green); }
 
 .header-inner {
   display: grid;
-  grid-template-columns: minmax(270px, 0.55fr) minmax(610px, auto) minmax(220px, 0.65fr);
+  grid-template-columns: minmax(310px, 0.55fr) minmax(610px, auto) minmax(220px, 0.65fr);
   align-items: center;
   gap: clamp(0.55rem, 1.35vw, 1.1rem);
-  min-height: 72px;
-  padding: 0.38rem 0;
+  min-height: 82px;
+  padding: 0.42rem 0;
   position: relative;
   z-index: 1;
 }
@@ -180,7 +180,7 @@ a  { color: var(--green); }
 .brand-title {
   display: block;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.38rem, 1.55vw, 1.72rem);
+  font-size: clamp(1.48rem, 1.65vw, 1.82rem);
   font-weight: 700;
   letter-spacing: 0;
   color: var(--green);
@@ -193,7 +193,7 @@ a  { color: var(--green); }
 }
 .brand-tagline {
   display: block;
-  font-size: clamp(0.64rem, 0.68vw, 0.76rem);
+  font-size: clamp(0.74rem, 0.8vw, 0.88rem);
   font-weight: 700;
   letter-spacing: 0.015em;
   color: var(--green-soft);
@@ -202,7 +202,7 @@ a  { color: var(--green); }
 }
 .brand-flower {
   position: relative;
-  width: 56px; height: 54px;
+  width: 60px; height: 58px;
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -210,8 +210,8 @@ a  { color: var(--green); }
   overflow: visible;
 }
 .brand-flower img {
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
   display: block;
   border-radius: 50%;
@@ -240,13 +240,13 @@ a  { color: var(--green); }
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0.34rem 0.62rem;
+  min-height: 36px;
+  padding: 0.36rem 0.6rem;
   white-space: nowrap;
   border-radius: 6px;
   text-decoration: none;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 0.94rem;
+  font-size: 1.02rem;
   font-weight: 600;
   letter-spacing: 0.015em;
   line-height: 1;
@@ -293,9 +293,9 @@ a  { color: var(--green); }
 .header-cta .btn {
   width: auto;
   min-width: 0;
-  padding: 0.34rem 0.95rem;
+  padding: 0.42rem 1.1rem;
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-align: center;
@@ -314,19 +314,19 @@ a  { color: var(--green); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 142px;
+  width: 160px;
   gap: 0.3rem;
-  font-weight: 700; font-size: 0.82rem; text-decoration: none;
+  font-weight: 700; font-size: 0.94rem; text-decoration: none;
   color: #17231b; white-space: nowrap;
 }
 .phone-icon {
   display: grid;
   place-items: center;
-  width: 22px; height: 22px;
+  width: 25px; height: 25px;
   border-radius: 50%;
   background: linear-gradient(180deg, #3857a7, #13295e);
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   box-shadow: 0 4px 9px rgba(19, 41, 94, 0.22);
 }
 
@@ -340,7 +340,7 @@ a  { color: var(--green); }
 
 /* ---------- hero ---------- */
 .hero {
-  padding: clamp(1.8rem, 4.7vw, 3.25rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  padding: clamp(1.8rem, 4.7vw, 3.25rem) 0 clamp(1.2rem, 3vw, 2rem);
   background-image: url("assets/hero-full-kieran.png");
   background-repeat: no-repeat;
   background-position: right 42%;
@@ -440,12 +440,14 @@ a  { color: var(--green); }
 /* ---------- service cards ---------- */
 .cards-3 {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.3rem; margin-top: 2.2rem;
+  gap: 1.3rem; margin-top: 0.5rem;
+  max-width: 1060px; margin-inline: auto;
 }
 .svc-card {
   background: var(--card); border: 1px solid rgba(166, 124, 0, 0.18);
   border-radius: var(--radius); padding: 1.6rem;
   box-shadow: var(--shadow); display: flex; flex-direction: column;
+  align-items: center; text-align: center;
 }
 .svc-card .icon {
   width: 52px; height: 52px; border-radius: 50%;
@@ -456,7 +458,7 @@ a  { color: var(--green); }
 .svc-card.gold .icon { background: var(--gold-soft); }
 .svc-card h3 { margin-bottom: 0.5rem; }
 .svc-card p { font-size: 0.95rem; flex: 1; }
-.svc-card a { margin-top: 1.2rem; align-self: flex-start; }
+.svc-card a { margin-top: 1.2rem; align-self: center; }
 
 /* ---------- trust bar ---------- */
 .trust-bar {
@@ -798,8 +800,8 @@ a  { color: var(--green); }
 /* ---------- meditating idea-seeds doodle (hero background) ---------- */
 .hero-zen {
   position: absolute;
-  top: 6%;
-  left: 45%;
+  top: 3%;
+  left: 39%;
   transform: translateX(-50%);
   width: clamp(190px, 19vw, 300px);
   height: auto;
@@ -809,11 +811,59 @@ a  { color: var(--green); }
 }
 @media (max-width: 900px) { .hero-zen { display: none; } }
 
-/* idea seeds drift slowly from behind the character's head */
+/* arms work away behind the laptop: elbows and shoulders bob in an
+   alternating typing rhythm (hands are hidden behind the lid).
+   He types in bursts — the .is-typing class comes and goes from JS,
+   so he pauses now and then, thinking. */
+.hero-zen .zen-arm {
+  transform-box: fill-box;
+  transform-origin: 50% 3%;
+  transition: transform 0.4s ease;
+}
+.hero-zen.is-typing .zen-arm {
+  animation: zen-type 0.5s ease-in-out infinite alternate;
+}
+.hero-zen .zen-arm-l { --tilt: -2deg; }
+.hero-zen .zen-arm-r { --tilt: 2deg; }
+.hero-zen.is-typing .zen-arm-r { animation-duration: 0.42s; animation-delay: 0.21s; }
+/* while he pauses, his face emotes: eyes lift and mouth purses in thought */
+.hero-zen .zen-eye, .hero-zen .zen-mouth {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transition: transform 0.5s ease;
+}
+.hero-zen.is-thinking .zen-eye-l { transform: translate(-1px, -2.5px) rotate(-6deg); }
+.hero-zen.is-thinking .zen-eye-r { transform: translate(-1px, -2.5px) rotate(6deg); }
+.hero-zen.is-thinking .zen-mouth { transform: translateY(2px) scaleX(0.55); }
+@keyframes zen-type {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(-2.6px) rotate(var(--tilt, -2.4deg)); }
+}
+/* gentle contented breathing as ideas form */
+.hero-zen .zen-head {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: zen-breathe 4.6s ease-in-out infinite alternate;
+}
+@keyframes zen-breathe {
+  from { transform: translateY(0) rotate(0deg); }
+  to   { transform: translateY(2.6px) rotate(0.7deg); }
+}
+/* the AI at work: soft pulsing light on the laptop lid */
+.hero-zen .zen-light { animation: zen-light 2.6s ease-in-out infinite; }
+@keyframes zen-light {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.95; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-zen .zen-arm, .hero-zen .zen-head, .hero-zen .zen-light { animation: none; }
+}
+
+/* one idea seed at a time, sprouting from the top of his head */
 .mind-seeds {
   position: absolute;
-  top: calc(6% + clamp(78px, 7.8vw, 123px));
-  left: 45%;
+  top: calc(3% + clamp(44px, 4.45vw, 70px)); /* top of the head */
+  left: 39%;
   width: 0;
   height: 0;
   z-index: 2;
@@ -825,44 +875,82 @@ a  { color: var(--green); }
   width: var(--size, 20px);
   height: auto;
   opacity: 0;
-  transform-origin: center;
-  animation: mind-seed-flow 38s cubic-bezier(0.18, 0.78, 0.22, 1) var(--delay, 0s) infinite;
+  transform-origin: 50% 100%; /* grows and pivots from its bottom tip */
+  animation: mind-seed-flow 22s linear 1 both;
   will-change: transform, opacity;
 }
 .mind-seed svg {
   display: block;
   width: 100%;
   height: auto;
-  animation: mind-seed-sway 5.8s ease-in-out infinite alternate;
+  animation: mind-seed-glow 3.4s ease-in-out infinite;
+}
+/* these seeds are special — new ideas carry a soft golden glow */
+@keyframes mind-seed-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(214, 164, 62, 0.75))
+            drop-shadow(0 0 10px rgba(230, 186, 92, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(224, 175, 68, 0.95))
+            drop-shadow(0 0 18px rgba(238, 198, 110, 0.55));
+  }
 }
 @keyframes mind-seed-flow {
-  0%, 13% {
+  /* the idea sparks and grows, upright, rooted at the head */
+  0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.06) rotate(0deg);
+    transform: translate(-50%, -100%) scale(0.05) rotate(0deg);
+    animation-timing-function: ease-out;
+  }
+  7% {
+    opacity: 0.45;
+    transform: translate(-50%, -100%) scale(0.25) rotate(0deg);
+    animation-timing-function: ease-in-out;
   }
   18% {
-    opacity: 0.42;
-    transform: translate(calc(-50% + var(--x1)), calc(-50% + var(--y1))) scale(0.62) rotate(0deg);
+    opacity: 0.65;
+    transform: translate(-50%, calc(-100% - 1vh)) scale(0.55) rotate(0deg);
+    animation-timing-function: ease-in-out;
   }
+  27% {
+    opacity: 0.85;
+    transform: translate(-50%, calc(-100% - 2vh)) scale(0.85) rotate(0deg);
+    animation-timing-function: ease-in-out;
+  }
+  /* fully grown */
   32% {
-    opacity: 0.72;
-    transform: translate(calc(-50% + var(--x2)), calc(-50% + var(--y2))) scale(0.8) rotate(2deg);
+    opacity: 0.9;
+    transform: translate(-50%, calc(-100% - 3vh)) scale(1) rotate(0deg);
+    animation-timing-function: ease-in-out;
   }
-  54% {
-    opacity: 0.64;
-    transform: translate(calc(-50% + var(--x3)), calc(-50% + var(--y3))) scale(0.9) rotate(-3deg);
+  /* it floats up a little and leans into the breeze —
+     this is the moment the next seed is born below */
+  41% {
+    opacity: 0.88;
+    transform: translate(calc(-50% + var(--dir, 1) * 2vw), calc(-100% - 6vh)) scale(1) rotate(calc(var(--dir, 1) * 6deg));
+    animation-timing-function: ease-in-out;
   }
-  78% {
-    opacity: 0.48;
-    transform: translate(calc(-50% + var(--x4)), calc(-50% + var(--y4))) scale(0.86) rotate(3deg);
+  /* the wind carries it across the screen, bobbing on the currents
+     (kept low enough that it never clips out of the top of the hero) */
+  55% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + var(--dir, 1) * 20vw), calc(-100% - 8vh)) scale(0.97) rotate(calc(var(--dir, 1) * -5deg));
+    animation-timing-function: ease-in-out;
   }
-  94% {
-    opacity: 0.18;
-    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.78) rotate(-2deg);
+  68% {
+    opacity: 0.68;
+    transform: translate(calc(-50% + var(--dir, 1) * 42vw), calc(-100% - 5vh)) scale(0.93) rotate(calc(var(--dir, 1) * 7deg));
+    animation-timing-function: ease-in-out;
+  }
+  82% {
+    opacity: 0.5;
+    transform: translate(calc(-50% + var(--dir, 1) * 68vw), calc(-100% - 8vh)) scale(0.9) rotate(calc(var(--dir, 1) * -6deg));
+    animation-timing-function: ease-in-out;
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.72) rotate(0deg);
+    transform: translate(calc(-50% + var(--dir, 1) * 96vw), calc(-100% - 6vh)) scale(0.86) rotate(0deg);
   }
 }
 @keyframes mind-seed-sway {
@@ -886,6 +974,58 @@ a  { color: var(--green); }
 @keyframes seed-drift {
   from { transform: translateX(0); }
   to   { transform: translateX(calc(100vw + 150px)); }
+}
+
+/* any section that hosts a drifting-seeds layer */
+.has-seeds, .about-teaser { position: relative; overflow: hidden; }
+.has-seeds .container, .about-teaser .container { position: relative; z-index: 1; }
+
+/* seeds drifting right to left — "Hi, I'm Kieran" section */
+.seeds-rtl .seed {
+  left: auto; right: -70px;
+  animation-name: seed-drift-rtl;
+}
+@keyframes seed-drift-rtl {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100vw - 150px)); }
+}
+
+/* seeds rising bottom to top — "Is this right for you" section */
+.seeds-up .seed {
+  bottom: -60px;
+  animation-name: seed-drift-up;
+}
+@keyframes seed-drift-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100vh - 120px)); }
+}
+
+/* seeds falling top to bottom — "How it works" section */
+.seeds-down .seed {
+  top: -60px;
+  animation-name: seed-drift-down;
+}
+@keyframes seed-drift-down {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(100vh + 120px)); }
+}
+
+/* seeds drifting diagonally, left to right and gently down —
+   "What you'll actually learn" section */
+.seeds-diag .seed { animation-name: seed-drift-diag; }
+@keyframes seed-drift-diag {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(calc(100vw + 150px), 35vh); }
+}
+
+/* the mirror image: right to left and gently up — FAQ section */
+.seeds-diag-flip .seed {
+  left: auto; right: -70px;
+  animation-name: seed-drift-diag-flip;
+}
+@keyframes seed-drift-diag-flip {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(calc(-100vw - 150px), -35vh); }
 }
 @keyframes seed-sway {
   from { transform: translateY(-16px) rotate(-14deg); }
