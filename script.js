@@ -65,8 +65,8 @@ if (form) {
       });
       if (!res.ok) throw new Error("Send failed");
       form.reset();
-      btn.textContent = "Sent ✓";
-      if (ok) ok.style.display = "block";
+      /* take them to a friendly thank-you page */
+      window.location.href = "/thanks";
     } catch (err) {
       btn.textContent = oldLabel;
       btn.disabled = false;
