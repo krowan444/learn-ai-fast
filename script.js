@@ -42,7 +42,16 @@ if (form) {
     const email = form.email.value.trim();
     const message = form.message.value.trim();
     const context = form.dataset.enquiryContext;
-    const fullMessage = context ? `${context}\n\n${message}` : message;
+    /* fold the optional topic + phone fields into the message so the
+       enquiry service keeps working unchanged */
+    const topic = form.topic ? form.topic.value : "";
+    const phone = form.phone ? form.phone.value.trim() : "";
+    const extras = [
+      topic ? `Enquiry type: ${topic}` : "",
+      phone ? `Phone: ${phone}` : "",
+      context || ""
+    ].filter(Boolean).join("\n");
+    const fullMessage = extras ? `${extras}\n\n${message}` : message;
     if (!name || !email || !message) return;
 
     btn.disabled = true;

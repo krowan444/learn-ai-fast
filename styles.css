@@ -704,12 +704,12 @@ a  { color: var(--green); }
 .contact-wrap { max-width: 560px; margin-inline: auto; }
 .contact-form { display: grid; gap: 1rem; margin-top: 2rem; }
 .contact-form label { font-weight: 600; color: var(--green); font-size: 0.92rem; }
-.contact-form input, .contact-form textarea {
+.contact-form input, .contact-form textarea, .contact-form select {
   width: 100%; padding: 0.8rem 1rem; margin-top: 0.3rem;
   border: 1.5px solid rgba(28,53,39,0.2); border-radius: 10px;
   font: inherit; background: var(--card); color: var(--ink);
 }
-.contact-form input:focus, .contact-form textarea:focus {
+.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
   outline: 2px solid var(--gold-soft); border-color: transparent;
 }
 .form-note { font-size: 0.88rem; color: var(--ink-soft); }
@@ -1027,6 +1027,59 @@ a  { color: var(--green); }
   from { transform: translate(0, 0); }
   to   { transform: translate(calc(-100vw - 150px), -35vh); }
 }
+
+/* ---------- calm-urgency stats band ---------- */
+.stats-band {
+  background: var(--green);
+  color: #f6f1e4;
+  padding: clamp(1.8rem, 4vw, 2.8rem) 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  text-align: center;
+}
+.stat strong {
+  display: block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+.stat span { font-size: 0.95rem; opacity: 0.92; }
+.stat-note {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.02rem;
+  margin-top: 0.4rem;
+  opacity: 0.95;
+}
+.stat-note strong { color: var(--gold); }
+@media (max-width: 760px) { .stats-grid { grid-template-columns: 1fr; gap: 1rem; } }
+
+/* ---------- visible price captions under lesson cards ---------- */
+.price-note {
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--green);
+  margin: 0.6rem 0 0.2rem;
+}
+.price-note em { color: var(--gold); font-style: normal; }
+
+/* ---------- testimonial quotes ---------- */
+.quote-card {
+  background: var(--card);
+  border: 1px solid rgba(166, 124, 0, 0.18);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+.quote-card .stars { color: var(--gold); letter-spacing: 2px; }
+.quote-card p { font-size: 0.98rem; margin: 0.5rem 0 0.6rem; }
+.quote-card cite { font-style: normal; font-size: 0.88rem; color: var(--green-soft); font-weight: 600; }
 @keyframes seed-sway {
   from { transform: translateY(-16px) rotate(-14deg); }
   to   { transform: translateY(16px) rotate(12deg); }
