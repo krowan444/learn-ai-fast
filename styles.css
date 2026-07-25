@@ -920,6 +920,10 @@ a  { color: var(--green); }
   grid-template-columns: minmax(250px, 0.85fr) 1.15fr;
 }
 .protect-lesson-media {
+  /* This panel is a coloured graphic sized by its grid column, not one of the
+     960x850 poster crops — so it must opt out of the card aspect-ratio, which
+     otherwise forces it wider than its column and over the text beside it. */
+  aspect-ratio: auto;
   height: auto;
   min-height: 390px;
 }
