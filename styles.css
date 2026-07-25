@@ -911,6 +911,65 @@ a  { color: var(--green); }
   font-weight: 600;
   font-size: 0.9rem;
 }
+/* ---------- Second Look Protect hero ----------
+   Photo is anchored right so the woman and laptop stay in frame at every
+   width; the left-to-right cream gradient keeps the blank part of the
+   picture readable behind the wording. Scoped to .protect-hero so the
+   shared centred .page-hero used on other pages is untouched. */
+.protect-hero {
+  position: relative;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  text-align: left;
+  background:
+    linear-gradient(90deg,
+      rgba(250,247,239,0.98) 0%,
+      rgba(250,247,239,0.95) 30%,
+      rgba(250,247,239,0.6) 46%,
+      rgba(250,247,239,0) 62%),
+    url("assets/protect-hero.webp") right center / cover no-repeat;
+  background-color: var(--cream);
+}
+.protect-hero .container { width: min(1120px, 92%); }
+.protect-hero-copy { max-width: 30rem; }
+.protect-hero-copy h1 { font-size: clamp(2rem, 4vw, 3.1rem); }
+/* override the centred .page-hero paragraph rule */
+.protect-hero-copy p:not(.kicker) {
+  margin: 0.9rem 0 0;
+  max-width: 34ch;
+}
+.protect-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+/* On narrow screens a right-anchored photo would sit straight under the
+   wording, so show it as a band across the top and fade to cream beneath. */
+@media (max-width: 860px) {
+  .protect-hero {
+    min-height: 540px;
+    align-items: flex-end;
+    background:
+      linear-gradient(0deg,
+        rgba(250,247,239,0.99) 0%,
+        rgba(250,247,239,0.96) 40%,
+        rgba(250,247,239,0.35) 62%,
+        rgba(250,247,239,0.05) 78%),
+      url("assets/protect-hero.webp") center top / 150% auto no-repeat;
+    background-color: var(--cream);
+    padding-block: 15rem 2.5rem;
+  }
+  .protect-hero-copy { max-width: none; }
+  .protect-hero-copy p:not(.kicker) { max-width: 42ch; }
+}
+@media (max-width: 520px) {
+  .protect-hero { min-height: 500px; padding-block: 12rem 2rem; }
+  .protect-hero-actions .btn { flex: 1 1 100%; text-align: center; }
+}
+
 .protect-lesson-feature {
   max-width: 850px;
   margin: 2rem auto 0;
