@@ -99,7 +99,7 @@ function showCalendar(s) {
   els.summary.innerHTML =
     "<strong>" + s.price + "</strong> · " + s.meta +
     " — pick a date and time below, then pay securely by card.";
-  els.frameTitle.textContent = "Available dates for your " + s.name.toLowerCase();
+  els.frameTitle.textContent = "Pick a date and time";
   els.frame.hidden = false;
   loadCalEmbed(s.calLink);
 }
