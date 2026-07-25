@@ -17,13 +17,30 @@ reads perfectly on phones and is good for SEO.
 
 Clean URLs (`/lessons` instead of `/lessons.html`) are handled by `vercel.json`.
 
-## ⚙️ Two things to set in `script.js`
+## 📅 Booking + payment flow
 
-1. **`CALENDLY_URL`** — create a free account at calendly.com, copy your booking
-   link, and paste it here. Every "Book a Session" button then opens Calendly.
-   Until you set it, booking buttons go to the contact page instead.
-2. **`CONTACT_EMAIL`** — where contact-form messages are sent
-   (currently `kierandrowan@gmail.com`).
+Customers never leave the site. Clicking a session's button goes to
+`/book?session=…`, which embeds the Cal.com calendar **and** the card payment
+step inside our own page, in our own styling.
+
+All session settings live in one list at the top of **`booking.js`**:
+
+| Key | What it does |
+|-----|--------------|
+| `calLink` | The Cal.com event, as `username/event-slug`. Set to `null` if that session has no online calendar yet. |
+| `payLink` | Stripe payment link. Only used as the fallback when `calLink` is `null`. |
+| `price` / `meta` / `name` | Text shown on the booking page. |
+
+**To add a new bookable session:** create the event type in Cal.com (with its
+price on the Stripe app), then add an entry to `SESSIONS` in `booking.js` and
+point the session page's button at `/book?session=your-key`.
+
+⚠️ Prices live in **Cal.com**, not in the site. If you change a price, change it
+on the Cal.com event type *and* in `booking.js` / the session page copy.
+
+## ⚙️ One thing to set in `script.js`
+
+**`CONTACT_EMAIL`** — where contact-form messages are sent.
 
 ## 🖼 Images
 

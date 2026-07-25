@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Choose Your Time — Learn AI Fast</title>
+  <meta name="description" content="Pick a date and time for your Learn AI Fast session, then pay securely by card — all without leaving the site." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://www.learnaifast.co.uk/book" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cal.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Learn AI Fast home"><span class="brand-flower" aria-hidden="true"><img src="assets/dandelion-logo-mark.png" alt="" width="114" height="114" /></span><span class="brand-lockup"><span class="brand-title">Learn <em>AI</em> Fast</span><span class="brand-tagline">Learn AI. Stay Safe. Stay Ahead.</span></span></a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/lessons" class="active">1-to-1 AI Lessons</a>
+      <a href="/talks">AI Safety Group Talks</a>
+      <a href="/protect">Second Look Protect</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-gold" href="/lessons">Book a Session</a>
+      <a class="phone-link" href="tel:07563887804"><span class="phone-icon" aria-hidden="true">☎</span><span>07563 887804</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero booking-hero">
+    <div class="container">
+      <p class="kicker">Step 2 of 2 — pick your time</p>
+      <h1 id="bookingTitle">Choose a time that suits you</h1>
+      <p id="bookingSummary">Pick a date and time below, then pay securely by card. You stay on Learn AI Fast the whole way.</p>
+    </div>
+  </section>
+
+  <section class="section booking-section">
+    <div class="container">
+
+      <!-- Reassurance strip -->
+      <ul class="booking-steps" aria-label="How booking works">
+        <li><span class="booking-step-num">1</span> Pick a date and time</li>
+        <li><span class="booking-step-num">2</span> Add your details</li>
+        <li><span class="booking-step-num">3</span> Pay securely by card</li>
+      </ul>
+
+      <!-- Session picker: only shown when no session was chosen -->
+      <div class="booking-picker" id="bookingPicker" hidden>
+        <p class="kicker">First, choose your session</p>
+        <div class="booking-picker-grid" id="bookingPickerGrid"></div>
+      </div>
+
+      <!-- The calendar itself -->
+      <div class="booking-frame" id="bookingFrame" hidden>
+        <div class="booking-frame-head">
+          <p class="booking-frame-title" id="bookingFrameTitle"></p>
+          <a class="booking-change" href="/lessons">Change session</a>
+        </div>
+        <div id="cal-inline" class="cal-inline">
+          <p class="booking-loading">Loading available dates…</p>
+        </div>
+        <p class="booking-reassure">
+          🔒 Payment is taken securely by card. Your confirmation and Zoom link are emailed
+          to you straight away. Prefer to talk first? <a href="/contact">Send a message</a>
+          or call <a href="tel:07563887804">07563&nbsp;887804</a>.
+        </p>
+      </div>
+
+      <!-- Shown if a session has no online calendar yet -->
+      <div class="booking-frame" id="bookingDirect" hidden>
+        <div class="booking-frame-head">
+          <p class="booking-frame-title" id="bookingDirectTitle"></p>
+          <a class="booking-change" href="/lessons">Change session</a>
+        </div>
+        <p>This session is booked by arrangement so we can find a time that works around you.
+           Pay securely below and I'll email you within one working day with times to choose from —
+           or send a message first if you'd rather chat.</p>
+        <a class="btn btn-gold" id="bookingDirectPay" href="/contact">Pay securely &amp; book</a>
+        <a class="btn btn-line" href="/contact" style="margin-left:0.6rem">Or send a message</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="brand" href="/">Learn <span>AI</span> Fast</a>
+    <nav class="footer-nav">
+      <a href="/">Home</a>
+      <a href="/lessons">1-to-1 AI Lessons</a>
+      <a href="/talks">AI Safety Group Talks</a>
+      <a href="/protect">Second Look Protect</a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+    </nav>
+    <p class="footer-meta">📞 <a href="tel:07563887804" style="color:inherit">07563 887804</a> ·
+       Northampton, Towcester &amp; surrounding areas · Zoom · © 2026 Learn AI Fast</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="booking.js"></script>
+</body>
+</html>

@@ -1,21 +1,15 @@
 /* ==========================================================
    Learn AI Fast — site settings + behaviour
-   EDIT THESE TWO LINES after you set up Calendly:
    ========================================================== */
-const CALENDLY_URL = "https://cal.com/kieran-rowan-tiujdp"; // Cal.com booking page (Stripe payments enabled)
 const CONTACT_EMAIL = "hello@learnaifast.co.uk";
 
 /* ---- Booking buttons ----
-   Every element with class "js-book" points to Calendly once
-   CALENDLY_URL is set; until then it falls back to the contact page. */
+   Any element with class "js-book" goes to our own on-site
+   booking page (/book), which embeds the calendar and payment.
+   Session-specific buttons link straight to /book?session=... */
 document.querySelectorAll(".js-book").forEach((el) => {
-  if (CALENDLY_URL.startsWith("http")) {
-    el.href = CALENDLY_URL;
-    el.target = "_blank";
-    el.rel = "noopener";
-  } else {
-    el.href = "/contact";
-  }
+  el.href = "/book";
+  el.removeAttribute("target");
 });
 
 /* ---- Mobile nav toggle ---- */
