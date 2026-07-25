@@ -1,6 +1,25 @@
 /* ==========================================================
    Learn AI Fast — site settings + behaviour
    ========================================================== */
+
+/* ---- Vercel Web Analytics ----
+   Loaded here rather than in each page, so every page that includes
+   script.js is counted automatically. Page views only — no cookies,
+   no personal data. View the numbers at:
+   vercel.com → learn-ai-fast → Analytics
+   Note: the /_vercel/insights/* routes only exist on Vercel, so this
+   silently does nothing when opening the files locally. */
+window.va = window.va || function () {
+  (window.vaq = window.vaq || []).push(arguments);
+};
+(function () {
+  if (location.hostname === "localhost" || location.protocol === "file:") return;
+  const s = document.createElement("script");
+  s.defer = true;
+  s.src = "/_vercel/insights/script.js";
+  document.head.appendChild(s);
+})();
+
 const CONTACT_EMAIL = "hello@learnaifast.co.uk";
 
 /* ---- Booking buttons ----
