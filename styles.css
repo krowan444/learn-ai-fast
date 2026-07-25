@@ -962,6 +962,11 @@ a  { color: var(--green); }
 }
 .lesson-detail-image img {
   width: min(100%, 430px);
+  /* height:auto is essential — the <img> tags carry height="1451" attributes,
+     and without this the poster gets stretched to 1451px tall. */
+  height: auto;
+  aspect-ratio: 1084 / 1451;
+  object-fit: contain;
   margin-inline: auto;
   border-radius: 14px;
   box-shadow: 0 16px 38px rgba(28,53,39,0.14);
