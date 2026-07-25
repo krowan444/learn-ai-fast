@@ -20,6 +20,28 @@ window.va = window.va || function () {
   document.head.appendChild(s);
 })();
 
+/* ---- Custom event helper ----
+   Wraps Vercel's va() so a missing/blocked analytics script can never
+   break the page. Requires a Pro plan (custom events aren't on Hobby).
+   Data values must be strings, numbers, booleans or null — no nesting. */
+window.lafTrack = function (name, data) {
+  try {
+    if (typeof window.va === "function") {
+      window.va("event", data ? { name: name, data: data } : { name: name });
+    }
+  } catch (err) {
+    /* analytics must never break the site */
+  }
+};
+
+/* ---- Funnel step 1: someone clicked through to book ---- */
+document.querySelectorAll(".detail-buy").forEach((el) => {
+  el.addEventListener("click", () => {
+    const q = (el.getAttribute("href") || "").split("session=")[1] || "unknown";
+    window.lafTrack("Clicked Book", { session: q });
+  });
+});
+
 const CONTACT_EMAIL = "hello@learnaifast.co.uk";
 
 /* ---- Booking buttons ----
@@ -87,6 +109,7 @@ if (form) {
         body: JSON.stringify({ firstName: name, email, message: fullMessage }),
       });
       if (!res.ok) throw new Error("Send failed");
+      window.lafTrack("Enquiry Sent", { topic: topic || "not given" });
       form.reset();
       /* take them to a friendly thank-you page */
       window.location.href = "/thanks";

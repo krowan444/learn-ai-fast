@@ -101,7 +101,15 @@ function showCalendar(s) {
     " — pick a date and time below, then pay securely by card.";
   els.frameTitle.textContent = "Pick a date and time";
   els.frame.hidden = false;
+  track("Booking Page Viewed", { session: key });
   loadCalEmbed(s.calLink);
+}
+
+/* ---- Analytics helper ----
+   Uses the shared lafTrack() from script.js. Guarded so the booking
+   page still works perfectly if analytics is blocked or missing. */
+function track(name, data) {
+  if (typeof window.lafTrack === "function") window.lafTrack(name, data);
 }
 
 /* ---- Session without a calendar yet: secure payment + follow-up ---- */
@@ -169,11 +177,47 @@ function loadCalEmbed(calLink) {
     },
   });
 
+  /* ---- Funnel events straight from the Cal.com embed ----
+     linkReady        = the calendar actually rendered for this visitor
+     linkFailed       = it didn't (ad blocker, network, bad slug)
+     bookingSuccessful = they got through to the confirmation screen.
+     The payload's `confirmed` flag tells paid-and-confirmed apart from
+     booked-but-awaiting-payment, which matters for these sessions. */
+  Cal("on", {
+    action: "linkReady",
+    callback: function () {
+      track("Calendar Loaded", { session: key });
+    },
+  });
+
+  Cal("on", {
+    action: "linkFailed",
+    callback: function (e) {
+      const d = (e && e.detail && e.detail.data) || {};
+      track("Calendar Failed", {
+        session: key,
+        code: typeof d.code === "number" ? d.code : -1,
+      });
+    },
+  });
+
+  Cal("on", {
+    action: "bookingSuccessful",
+    callback: function (e) {
+      const d = (e && e.detail && e.detail.data) || {};
+      track("Booking Completed", {
+        session: key,
+        confirmed: d.confirmed === true,
+      });
+    },
+  });
+
   /* If the calendar hasn't appeared after 8 seconds (blocked script,
      bad connection), show a plain link so nobody hits a dead end. */
   setTimeout(function () {
     const holder = document.getElementById("cal-inline");
     if (holder && !holder.querySelector("iframe")) {
+      track("Calendar Failed", { session: key, code: 0 });
       holder.innerHTML =
         '<p class="booking-loading">The calendar is taking a moment to load. ' +
         '<a href="https://cal.com/' + calLink + '" ' +
