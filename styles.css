@@ -37,6 +37,18 @@ img { max-width: 100%; display: block; }
 
 .container { width: min(1120px, 92%); margin-inline: auto; }
 
+/* Visually hidden but still read by screen readers and search engines.
+   Used for card headings whose words are already inside the poster image. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; color: var(--green); line-height: 1.15; }
 
 h1 { font-size: clamp(2.1rem, 5.5vw, 3.4rem); font-weight: 600; }
@@ -819,8 +831,11 @@ a  { color: var(--green); }
   opacity: 1;
   transform: scale(1);
 }
+/* The card images are purpose-made 960x850 crops of Kieran's posters —
+   they include the session title and price, so they must NOT be cropped.
+   The aspect-ratio below matches the files exactly, so nothing is lost. */
 .lesson-option-media {
-  height: 210px;
+  aspect-ratio: 960 / 850;
   overflow: hidden;
   background: var(--cream-2);
 }
@@ -832,8 +847,7 @@ a  { color: var(--green); }
 .lesson-option-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 58%;
+  object-fit: contain;
   display: block;
 }
 .lesson-option-content {
@@ -963,10 +977,9 @@ a  { color: var(--green); }
 .lesson-detail-image img {
   width: min(100%, 430px);
   /* height:auto is essential — the <img> tags carry height="1451" attributes,
-     and without this the poster gets stretched to 1451px tall. */
+     and without it the poster gets stretched to 1451px tall. Letting height
+     be auto keeps each poster at its own natural proportions. */
   height: auto;
-  aspect-ratio: 1084 / 1451;
-  object-fit: contain;
   margin-inline: auto;
   border-radius: 14px;
   box-shadow: 0 16px 38px rgba(28,53,39,0.14);
@@ -1103,7 +1116,6 @@ a  { color: var(--green); }
   .about-next-step-actions { justify-items: start; }
   .cards-3, .steps, .price-grid, .lesson-option-grid, .lesson-detail-grid { grid-template-columns: 1fr; }
   .fit-grid { grid-template-columns: 1fr; }
-  .lesson-option-media { height: clamp(200px, 55vw, 280px); }
   .badge-stack {
     grid-template-columns: 1fr;
     margin: -1.3rem 0.8rem 0;
