@@ -1344,7 +1344,7 @@ a  { color: var(--green); }
   height: auto;
   opacity: 0;
   transform-origin: 50% 100%; /* grows and pivots from its bottom tip */
-  animation: mind-seed-flow 22s linear 1 both;
+  animation: mind-seed-flow 22.5s linear 1 both;
   will-change: transform, opacity;
 }
 .mind-seed svg {
@@ -1371,47 +1371,55 @@ a  { color: var(--green); }
     transform: translate(-50%, -100%) scale(0.05) rotate(0deg);
     animation-timing-function: ease-out;
   }
-  7% {
-    opacity: 0.45;
-    transform: translate(-50%, -100%) scale(0.25) rotate(0deg);
+  /* Growth is deliberately quick — it used to take until 32% (7 seconds)
+     to reach full size, which left a long dead wait after the thought
+     bubble faded. Now it forms by 15% (~3.3s), just as the bubble finishes
+     clearing, so the idea visibly turns into the seed. Everything from 41%
+     onward — the drift across the hero — is untouched. */
+  2% {
+    opacity: 0.5;
+    transform: translate(-50%, -100%) scale(0.3) rotate(0deg);
     animation-timing-function: ease-in-out;
   }
-  18% {
-    opacity: 0.65;
-    transform: translate(-50%, calc(-100% - 1vh)) scale(0.55) rotate(0deg);
+  5% {
+    opacity: 0.7;
+    transform: translate(-50%, calc(-100% - 1vh)) scale(0.6) rotate(0deg);
     animation-timing-function: ease-in-out;
   }
-  27% {
+  7.5% {
     opacity: 0.85;
-    transform: translate(-50%, calc(-100% - 2vh)) scale(0.85) rotate(0deg);
+    transform: translate(-50%, calc(-100% - 2vh)) scale(0.87) rotate(0deg);
     animation-timing-function: ease-in-out;
   }
-  /* fully grown */
-  32% {
+  /* fully grown — about 2s, straight off the crown of his head */
+  9% {
     opacity: 0.9;
     transform: translate(-50%, calc(-100% - 3vh)) scale(1) rotate(0deg);
     animation-timing-function: ease-in-out;
   }
-  /* it floats up a little and leans into the breeze —
-     this is the moment the next seed is born below */
-  41% {
+  /* it lifts off and leans into the breeze. Moved from 41% to 20% so it
+     stops hovering on his head for seven seconds after forming — the hover
+     is now about 2.5s. Everything after this is the same drift, just
+     stretched over a longer stretch of the timeline so it sails off the
+     screen more slowly. */
+  20% {
     opacity: 0.88;
     transform: translate(calc(-50% + var(--dir, 1) * 2vw), calc(-100% - 6vh)) scale(1) rotate(calc(var(--dir, 1) * 6deg));
     animation-timing-function: ease-in-out;
   }
   /* the wind carries it across the screen, bobbing on the currents
      (kept low enough that it never clips out of the top of the hero) */
-  55% {
+  39% {
     opacity: 0.8;
     transform: translate(calc(-50% + var(--dir, 1) * 20vw), calc(-100% - 8vh)) scale(0.97) rotate(calc(var(--dir, 1) * -5deg));
     animation-timing-function: ease-in-out;
   }
-  68% {
+  56.5% {
     opacity: 0.68;
     transform: translate(calc(-50% + var(--dir, 1) * 42vw), calc(-100% - 5vh)) scale(0.93) rotate(calc(var(--dir, 1) * 7deg));
     animation-timing-function: ease-in-out;
   }
-  82% {
+  75.5% {
     opacity: 0.5;
     transform: translate(calc(-50% + var(--dir, 1) * 68vw), calc(-100% - 8vh)) scale(0.9) rotate(calc(var(--dir, 1) * -6deg));
     animation-timing-function: ease-in-out;
@@ -1427,6 +1435,104 @@ a  { color: var(--green); }
 }
 @media (prefers-reduced-motion: reduce) {
   .mind-seed { display: none; }
+  .mind-bubble { display: none; }
+}
+
+/* ---------- idea thought-bubble ----------
+   Three growing dots trail up-right off the top of his head, then a bubble
+   pops open with an idea inside (money, a book, a game, a task list). It
+   holds while the idea forms, then shrinks back toward his head and fades
+   at the exact moment a dandelion seed is born — so the idea becomes the
+   seed and floats away.
+
+   Lives inside .mind-seeds, which is already anchored to the top of his
+   head, so it follows him automatically if he ever moves again.
+   Offsets are kept shallow on purpose: .hero has overflow:hidden, so a
+   steeper rise would clip the bubble off the top of the section. */
+.mind-bubble {
+  --bw: clamp(34px, 3.4vw, 54px);   /* bubble diameter; everything scales off this */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;            /* shrink pulls back toward his head */
+  pointer-events: none;
+  animation: mind-bubble-life 8s ease-in forwards;
+}
+/* Colours deliberately copy the character: his line work is #2b2b2b and his
+   laptop is filled #f8f2e5, and .hero-zen sits at 0.4 opacity. Matching all
+   three keeps the bubble part of the same drawing rather than a bolder
+   element floating on top of it. */
+.mind-bubble-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #f8f2e5;
+  border: 1.5px solid #2b2b2b;
+}
+.mind-bubble-dot-1 {
+  width: calc(var(--bw) * 0.13); height: calc(var(--bw) * 0.13);
+  left: calc(var(--bw) * 0.28);  top: calc(var(--bw) * 0.04);
+  animation: mind-bubble-pop 0.5s ease-out both;
+}
+.mind-bubble-dot-2 {
+  width: calc(var(--bw) * 0.20); height: calc(var(--bw) * 0.20);
+  left: calc(var(--bw) * 0.55);  top: calc(var(--bw) * -0.14);
+  animation: mind-bubble-pop 0.5s ease-out 0.6s both;
+}
+.mind-bubble-dot-3 {
+  width: calc(var(--bw) * 0.27); height: calc(var(--bw) * 0.27);
+  left: calc(var(--bw) * 0.85);  top: calc(var(--bw) * -0.38);
+  animation: mind-bubble-pop 0.5s ease-out 1.2s both;
+}
+.mind-bubble-body {
+  position: absolute;
+  left: calc(var(--bw) * 1.12);
+  top: calc(var(--bw) * -0.88);
+  width: var(--bw);
+  height: var(--bw);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f8f2e5;
+  border: 1.6px solid #2b2b2b;
+  animation: mind-bubble-pop 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.85s both;
+}
+/* separate element so the gentle float doesn't fight the pop's transform */
+.mind-bubble-inner {
+  display: grid;
+  place-items: center;
+  width: 60%;
+  height: 60%;
+  color: #2b2b2b;
+  animation: mind-bubble-float 3.6s ease-in-out 2s infinite;
+}
+.mind-bubble-inner svg { width: 100%; height: 100%; display: block; }
+
+@keyframes mind-bubble-pop {
+  from { transform: scale(0);   opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+@keyframes mind-bubble-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8%); }
+}
+/* holds until 80% (= 6.4s of 8s). 0.4 opacity is the same value .hero-zen
+   uses, so the bubble reads as part of the same drawing. */
+@keyframes mind-bubble-life {
+  0%, 80% {
+    opacity: 0.4;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--bw) * -0.3), calc(var(--bw) * 0.45)) scale(0.3);
+  }
+}
+@media (max-width: 900px) {
+  /* smaller character, and the hero top is closer, so keep the rise shallow */
+  .mind-bubble { --bw: clamp(26px, 7vw, 38px); }
+  .mind-bubble-body { top: calc(var(--bw) * -0.78); }
 }
 
 /* ---------- floating dandelion seeds (hero) ---------- */

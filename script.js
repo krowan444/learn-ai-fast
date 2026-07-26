@@ -211,9 +211,15 @@ if (mindSeedHost) {
   /* Each seed grows at his head, floats up a little, and the moment it
      leaves, the next one is born below it. They alternate direction:
      one sails left across the screen, the next sails right. */
-  const LIFETIME = 22;    // seconds — must match the CSS animation duration
-  const LAUNCH_AT = 0.41; // fraction of the timeline when it floats off
-  let flyDir = 1;         // 1 = right, -1 = left; alternates each birth
+  const LIFETIME = 22.5;   // seconds — must match the CSS animation duration
+  const LAUNCH_AT = 0.20;  // fraction of the timeline when it floats off (the 20% keyframe)
+  /* How often a new seed is born. This used to be LIFETIME x LAUNCH_AT, which
+     forced the seed to hover on his head right up until the next one arrived
+     — about seven seconds of very little happening. Keeping it as its own
+     value lets the seed lift off early (4.5s) and still drift for a long,
+     slow 18s, while the birth rhythm stays locked to the thought-bubble cycle. */
+  const SPAWN_EVERY = 9.02;
+  let flyDir = 1;          // 1 = right, -1 = left; alternates each birth
 
   const spawnSeed = () => {
     const s = document.createElement("span");
@@ -229,11 +235,113 @@ if (mindSeedHost) {
     mindSeedHost.appendChild(s);
   };
 
-  /* if the visitor prefers reduced motion the CSS hides the seeds,
-     so don't spawn them at all (they'd pile up unseen) */
+  /* ---- Idea thought-bubbles ----
+     Each cycle: three dots trail up-right off his head, a bubble pops open
+     with one idea inside, it holds while the idea forms, then it shrinks
+     back toward his head and fades at the same moment a seed is born — the
+     idea becomes the seed and floats away. Ideas rotate in order. */
+  const ICON = (paths) =>
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+    'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' +
+    paths + "</svg>";
+
+  /* Ten ideas, cycling in order. Kept deliberately loose and everyday —
+     the point is "AI helped me do this", not any one specific service. */
+  const IDEAS = [
+    /* a lightbulb — the idea itself */
+    ICON(
+      '<path d="M12 4.2a5.2 5.2 0 0 0-3 9.5v2.1h6v-2.1a5.2 5.2 0 0 0-3-9.5z"/>' +
+      '<path d="M10 18.2h4"/><path d="M10.7 20.3h2.6"/>'
+    ),
+    /* a book */
+    ICON(
+      '<path d="M12 8.2C10.3 7.1 8.4 6.6 6.4 6.6H5.2v10.2h1.2c2 0 3.9.5 5.6 1.6 1.7-1.1 3.6-1.6 5.6-1.6h1.2V6.6h-1.2c-2 0-3.9.5-5.6 1.6z"/>' +
+      '<path d="M12 8.2v10.2"/>'
+    ),
+    /* a task list with ticks */
+    ICON(
+      '<path d="M4.6 8.4l1.6 1.6 2.9-3"/>' +
+      '<path d="M11.6 8.4h7.8"/>' +
+      '<path d="M4.6 15.4l1.6 1.6 2.9-3"/>' +
+      '<path d="M11.6 15.4h7.8"/>'
+    ),
+    /* a games controller — proper gamepad silhouette with grips */
+    ICON(
+      '<path d="M8.6 9.6h6.8a5 5 0 0 1 4.9 4.1l.5 2.7a2.2 2.2 0 0 1-4 1.6l-1.5-2.1H7.7l-1.5 2.1a2.2 2.2 0 0 1-4-1.6l.5-2.7a5 5 0 0 1 4.9-4.1z"/>' +
+      '<path d="M7.4 12.3v2.2M6.3 13.4h2.2"/>' +
+      '<circle cx="15.4" cy="12.7" r="1" fill="currentColor" stroke="none"/>' +
+      '<circle cx="17.2" cy="14.5" r="1" fill="currentColor" stroke="none"/>'
+    ),
+    /* a growth chart */
+    ICON(
+      '<path d="M4.5 19.2h15"/>' +
+      '<path d="M7.6 19.2v-4.6M12 19.2v-8.4M16.4 19.2v-3.2"/>'
+    ),
+    /* a shopping bag — selling something */
+    ICON(
+      '<path d="M5.6 8.6h12.8l-1 10.1a1.4 1.4 0 0 1-1.4 1.3H8a1.4 1.4 0 0 1-1.4-1.3z"/>' +
+      '<path d="M9 8.6V7.1a3 3 0 0 1 6 0v1.5"/>'
+    ),
+    /* an envelope */
+    ICON(
+      '<rect x="3.6" y="6.6" width="16.8" height="11.4" rx="2"/>' +
+      '<path d="M4.4 8.1l7.6 5.5 7.6-5.5"/>'
+    ),
+    /* a speech bubble */
+    ICON(
+      '<path d="M20 12.4c0 3.4-3.6 6.2-8 6.2-1 0-2-.15-2.9-.42L4.4 20l1.2-3.3A6.4 6.4 0 0 1 4 12.4C4 9 7.6 6.2 12 6.2s8 2.8 8 6.2z"/>'
+    ),
+    /* a calendar */
+    ICON(
+      '<rect x="4" y="6.6" width="16" height="13.4" rx="2"/>' +
+      '<path d="M4 10.7h16"/><path d="M8.6 4.6v3.7M15.4 4.6v3.7"/>' +
+      '<circle cx="9" cy="14.2" r=".9" fill="currentColor" stroke="none"/>' +
+      '<circle cx="12.6" cy="14.2" r=".9" fill="currentColor" stroke="none"/>'
+    ),
+    /* a picture */
+    ICON(
+      '<rect x="3.6" y="5.6" width="16.8" height="12.8" rx="2"/>' +
+      '<circle cx="8.8" cy="10.2" r="1.5"/>' +
+      '<path d="M4.4 16.7l4.6-4.4 3.4 3.2 2.8-2.4 4.4 3.9"/>'
+    ),
+  ];
+
+  /* Seconds the bubble leads the seed by. The idea symbol finishes opening
+     at ~3.35s (1.85s delay + 1.5s pop), so 3.6s puts the seed's birth just
+     after the symbol has appeared. The bubble then holds until 6.4s and
+     fades by 8s, while the seed grows off the crown of his head. */
+  const BUBBLE_LEAD = 3.6;
+  let ideaIndex = 0;
+
+  const spawnBubble = () => {
+    const b = document.createElement("span");
+    b.className = "mind-bubble";
+    b.innerHTML =
+      '<i class="mind-bubble-dot mind-bubble-dot-1"></i>' +
+      '<i class="mind-bubble-dot mind-bubble-dot-2"></i>' +
+      '<i class="mind-bubble-dot mind-bubble-dot-3"></i>' +
+      '<span class="mind-bubble-body"><span class="mind-bubble-inner">' +
+      IDEAS[ideaIndex] +
+      "</span></span>";
+    ideaIndex = (ideaIndex + 1) % IDEAS.length;
+    b.addEventListener("animationend", (e) => {
+      if (e.animationName === "mind-bubble-life") b.remove();
+    });
+    mindSeedHost.appendChild(b);
+  };
+
+  /* the bubble leads, the seed follows — so the idea forms first,
+     then turns into the seed that drifts away */
+  const runCycle = () => {
+    spawnBubble();
+    setTimeout(spawnSeed, BUBBLE_LEAD * 1000);
+  };
+
+  /* if the visitor prefers reduced motion the CSS hides the seeds and
+     bubbles, so don't spawn them at all (they'd pile up unseen) */
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    spawnSeed();
-    setInterval(spawnSeed, LIFETIME * LAUNCH_AT * 1000);
+    runCycle();
+    setInterval(runCycle, SPAWN_EVERY * 1000);
   }
 }
 
