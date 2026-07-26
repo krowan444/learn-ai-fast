@@ -836,11 +836,12 @@ a  { color: var(--green); }
   opacity: 1;
   transform: scale(1);
 }
-/* The card images are purpose-made 960x850 crops of Kieran's posters —
-   they include the session title and price, so they must NOT be cropped.
-   The aspect-ratio below matches the files exactly, so nothing is lost. */
+/* Square, so a square advert displays whole with nothing cropped away.
+   Cropping tall posters into a wide slot meant discarding ~40% of the
+   artwork and enlarging the rest, which is what made the cards look
+   zoomed in. New adverts should be supplied square at 1500x1500. */
 .lesson-option-media {
-  aspect-ratio: 960 / 850;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--cream-2);
 }
