@@ -132,10 +132,17 @@
             <path d="M180 316 V297" stroke="#3f7d52" stroke-width="3.4" stroke-linecap="round" fill="none" />
             <path d="M180 300 C170 300 163 294 162 286 C172 285 179 291 180 300 Z" fill="#4f9a63" />
             <path d="M180 300 C190 300 197 294 198 286 C188 285 181 291 180 300 Z" fill="#3f7d52" />
+            <!-- sits just under the seedling, below the badge. Inside this
+                 group because it has stroke="none" — out here it would pick
+                 up the parent's 4px dark outline and turn into a blob. -->
+            <text class="zen-sticker-word" x="180" y="334" text-anchor="middle"
+                  font-size="16" font-weight="800" letter-spacing="0.8"
+                  fill="#2f6b46">learn ai fast</text>
           </g>
-          <!-- was in the centre of the lid; moved down to the edge so the
-               sticker can sit in the middle. Now reads as a power light. -->
-          <circle class="zen-light" cx="180" cy="341" r="3.4" fill="#c9932b" stroke="none" opacity="0.75" />
+          <!-- was in the centre of the lid. Moved to the bottom corner so the
+               sticker and its wording own the middle, and the descenders on
+               "begin and grow" have room. Reads as a power light. -->
+          <circle class="zen-light" cx="248" cy="342" r="3.4" fill="#c9932b" stroke="none" opacity="0.75" />
           <path d="M78 351 H282 L310 376 H50 Z" fill="#efe1c9" stroke-width="4.5" />
         </g>
       </g>

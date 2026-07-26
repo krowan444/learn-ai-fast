@@ -2081,3 +2081,15 @@ a  { color: var(--green); }
 @media (prefers-reduced-motion: reduce) {
   .zen-plant .zen-sprout { animation: none; }
 }
+
+/* the tiny word under the seedling sticker on his laptop lid.
+   Inter is only loaded at 400/500/600, so a heavier font-weight would just
+   be synthesised by the browser and look ragged. A stroke in the same green
+   genuinely thickens the letterforms, which is what tiny text needs.
+   paint-order keeps the stroke behind the fill so the shapes stay crisp. */
+.zen-sticker-word {
+  font-family: Inter, system-ui, sans-serif;
+  stroke: #2f6b46;
+  stroke-width: 0.8;
+  paint-order: stroke fill;
+}
