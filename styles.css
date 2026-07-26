@@ -1262,6 +1262,9 @@ a  { color: var(--green); }
   z-index: 2;
   pointer-events: none;
   opacity: 0.4;
+  /* the third pot sits at negative x, just outside the 0 0 360 420 viewBox —
+     without this the SVG would clip it in half at the left edge */
+  overflow: visible;
 }
 /* He used to be display:none below 900px, so no phone or tablet visitor ever
    saw him. Now he just shrinks. Seed offset recalculated to match. */
@@ -2054,4 +2057,27 @@ a  { color: var(--green); }
   .booking-frame { padding: 0.9rem; }
   .cal-inline { min-height: 560px; }
   .booking-steps { gap: 0.5rem 1rem; font-size: 0.88rem; }
+}
+
+/* ---------- the two little pot plants beside him ----------
+   Only the sprout sways, never the pot — a rocking pot would look
+   like it was about to fall over. Origin is the base of the stem so
+   it pivots where it meets the soil. Different speeds and amounts,
+   and a negative delay on the right one, so the two are never in
+   step with each other or with his breathing. */
+.zen-plant .zen-sprout {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: zen-sway 5.4s ease-in-out infinite alternate;
+}
+.zen-plant-l .zen-sprout  { --sway: 2deg;   animation-duration: 5.4s; }
+/* stiff upright blades barely move — a big sway here would look like rubber */
+.zen-plant-l2 .zen-sprout { --sway: 1.1deg; animation-duration: 6.3s; animation-delay: -3.2s; }
+.zen-plant-r .zen-sprout  { --sway: 3.2deg; animation-duration: 7.1s; animation-delay: -1.6s; }
+@keyframes zen-sway {
+  from { transform: rotate(calc(var(--sway, 2deg) * -1)); }
+  to   { transform: rotate(var(--sway, 2deg)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zen-plant .zen-sprout { animation: none; }
 }
