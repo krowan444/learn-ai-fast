@@ -1247,18 +1247,30 @@ a  { color: var(--green); }
 }
 
 /* ---------- meditating idea-seeds doodle (hero background) ---------- */
+/* IMPORTANT: if you change `top`, `left` or `width` here, you must change
+   .mind-seeds to match — it is a separate element and does not follow him.
+   Its `top` offset is 0.2333 x his width (the head sits 23.3% down the SVG),
+   which is where the idea-seeds appear to come from. Get this wrong and the
+   seeds stream out of empty space instead of his head. */
 .hero-zen {
   position: absolute;
-  top: 3%;
-  left: 39%;
+  top: 8%;
+  left: 41%;
   transform: translateX(-50%);
-  width: clamp(190px, 19vw, 300px);
+  width: clamp(150px, 15vw, 240px);
   height: auto;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.25;
+  opacity: 0.4;
 }
-@media (max-width: 900px) { .hero-zen { display: none; } }
+/* He used to be display:none below 900px, so no phone or tablet visitor ever
+   saw him. Now he just shrinks. Seed offset recalculated to match. */
+@media (max-width: 900px) {
+  .hero-zen {
+    top: 4%;
+    width: clamp(96px, 26vw, 150px);
+  }
+}
 
 /* arms work away behind the laptop: elbows and shoulders bob in an
    alternating typing rhythm (hands are hidden behind the lid).
@@ -1309,15 +1321,22 @@ a  { color: var(--green); }
 }
 
 /* one idea seed at a time, sprouting from the top of his head */
+/* Must mirror .hero-zen exactly — see the note on that rule.
+   top = his `top` + 0.2333 x his width = the top of his head. */
 .mind-seeds {
   position: absolute;
-  top: calc(3% + clamp(44px, 4.45vw, 70px)); /* top of the head */
-  left: 39%;
+  top: calc(8% + clamp(35px, 3.5vw, 56px)); /* top of the head */
+  left: 41%;
   width: 0;
   height: 0;
   z-index: 2;
   pointer-events: none;
   overflow: visible;
+}
+@media (max-width: 900px) {
+  .mind-seeds {
+    top: calc(4% + clamp(22px, 6.07vw, 35px));
+  }
 }
 .mind-seed {
   position: absolute;
