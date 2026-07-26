@@ -85,7 +85,18 @@
         <!-- laptop covering the lower half -->
         <g class="zen-laptop">
           <rect x="94" y="247" width="172" height="104" rx="12" fill="#f8f2e5" stroke-width="4.5" />
-          <circle class="zen-light" cx="180" cy="299" r="5" fill="#c9932b" stroke="none" opacity="0.75" />
+          <!-- sticker on the lid: a seedling, the same growth idea as the
+               seeds drifting off his head. stroke="none" so it doesn't pick
+               up the dark line work from the parent group. -->
+          <g class="zen-sticker" stroke="none">
+            <circle cx="180" cy="296" r="25" fill="#e8f1ea" />
+            <path d="M180 316 V297" stroke="#3f7d52" stroke-width="3.4" stroke-linecap="round" fill="none" />
+            <path d="M180 300 C170 300 163 294 162 286 C172 285 179 291 180 300 Z" fill="#4f9a63" />
+            <path d="M180 300 C190 300 197 294 198 286 C188 285 181 291 180 300 Z" fill="#3f7d52" />
+          </g>
+          <!-- was in the centre of the lid; moved down to the edge so the
+               sticker can sit in the middle. Now reads as a power light. -->
+          <circle class="zen-light" cx="180" cy="341" r="3.4" fill="#c9932b" stroke="none" opacity="0.75" />
           <path d="M78 351 H282 L310 376 H50 Z" fill="#efe1c9" stroke-width="4.5" />
         </g>
       </g>
