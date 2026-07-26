@@ -177,6 +177,15 @@
           “Friendly, patient and explains AI clearly — highly recommend.”</p>
       </figure>
     </div>
+    <!-- Social proof over the right half of the hero. A direct child of .hero
+         rather than of .hero-figure-full, because everything inside that figure
+         is display:none — the badges you see there are baked into the photo. -->
+    <figure class="hero-review">
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <blockquote>“I felt like I was falling behind with technology, but once Kieran
+        showed me it just clicked — now I even use AI to help me whenever I get stuck.”</blockquote>
+      <figcaption>Katie, Towcester</figcaption>
+    </figure>
   </section>
 
   <!-- ============ SERVICES ============ -->
@@ -254,6 +263,51 @@
       <div class="reassure">
         <span>No technical jargon or overwhelm</span>
         <span>Just gentle, patient guidance</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ IS THIS RIGHT FOR YOU ============ -->
+  <!-- seeds-up is the drifting-seed layer that belonged to this section
+       originally — the CSS comment for it still names it. -->
+  <section class="section alt has-seeds">
+    <div class="seeds seeds-up" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head">
+        <h2>Is this right <span class="accent-gold">for you?</span></h2>
+        <div class="rule"></div>
+        <p style="margin-top:1rem">Most people who come to me say the same thing first:
+           “I feel a bit silly asking.” You won’t here. See if any of these sound like you.</p>
+      </div>
+      <div class="fit-grid">
+        <div class="fit-card"><div class="icon">🌱</div>
+          <p><strong>You’ve never touched AI</strong><br />
+          You keep hearing about it, you’re curious, but you don’t know where to start
+          or what’s safe to try. We start from zero, at your pace.</p></div>
+        <div class="fit-card"><div class="icon">🛡️</div>
+          <p><strong>You’re worried about scams</strong><br />
+          Cloned voices, fake messages, that “urgent” call from family. You want to know
+          what’s changed and exactly what to check before you act.</p></div>
+        <div class="fit-card"><div class="icon">🔁</div>
+          <p><strong>You’ve tried and given up</strong><br />
+          A free course or video moved too fast and you felt lost. That isn’t you
+          failing — it’s the wrong format. This is a patient human instead.</p></div>
+        <div class="fit-card"><div class="icon">💼</div>
+          <p><strong>You run a small business</strong><br />
+          You suspect AI could save you hours but don’t know which tools are worth it.
+          We’ll work on your actual business, not a generic example.</p></div>
+        <div class="fit-card"><div class="icon">💛</div>
+          <p><strong>You’re worried about a parent</strong><br />
+          You’d like Mum or Dad to have someone patient to sit with them — and a real
+          person they can call before they trust anything suspicious.</p></div>
+        <div class="fit-card"><div class="icon">🧭</div>
+          <p><strong>You use it already, but guess a lot</strong><br />
+          You get answers, they’re just not that good. We’ll sharpen how you ask and
+          show you what it’s genuinely reliable for.</p></div>
+      </div>
+      <div style="text-align:center; margin-top:1.6rem">
+        <a class="btn btn-gold" href="/lessons">See the sessions</a>
+        <a class="btn btn-line" href="/contact" style="margin-left:0.6rem">Not sure? Just ask</a>
       </div>
     </div>
   </section>
