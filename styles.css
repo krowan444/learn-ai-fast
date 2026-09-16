@@ -368,6 +368,8 @@ a  { color: var(--green); }
 }
 
 .hero h1 { margin-bottom: 1.1rem; }
+.hero-art { display: contents; }
+.hero-mobile-intro, .hero-mobile-followup { display: none; }
 
 .hero-copy { position: relative; z-index: 3; transform: translateY(-0.65rem); }
 
@@ -1160,19 +1162,39 @@ a  { color: var(--green); }
   .hero-grid, .about-grid { grid-template-columns: 1fr; }
   .approach ul { grid-template-columns: 1fr; }
   .hero {
-    --hero-zen-top: 2rem;
+    --hero-zen-top: calc(100% - var(--hero-zen-width) * 420 / 360);
     --hero-zen-left: 20%;
     --hero-zen-width: clamp(96px, 26vw, 150px);
-    /* Reserve a separate art row before the copy. The background is 120%
-       wide with a 2000 x 786 aspect ratio; the character is at most 175px tall. */
-    --hero-art-height: max(47.16vw, 175px);
-    background-image: url("assets/hero-full-kieran.webp");
-    background-repeat: no-repeat;
-    background-position: right var(--hero-zen-top);
-    background-size: 120% auto;
-    padding-top: calc(var(--hero-zen-top) + var(--hero-art-height) + 2rem);
+    background-image: none;
+    padding-top: 1.5rem;
     padding-bottom: 2rem;
   }
+  .hero-mobile-intro { display: block; text-align: center; }
+  .hero-mobile-intro h1 { margin-bottom: 1.5rem; }
+  .hero-art {
+    display: block;
+    position: relative;
+    /* The 120%-wide photo is 2000 x 786. Keep room for the character too. */
+    height: max(47.16vw, 175px);
+    background-image: url("assets/hero-full-kieran.webp");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 120% auto;
+    margin-bottom: 1.5rem;
+  }
+  .hero-copy { text-align: center; transform: none; }
+  .hero-copy > .kicker, .hero-desktop-heading { display: none; }
+  .hero-copy p { margin-inline: auto; }
+  .hero-mobile-followup {
+    display: block;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.8rem, 4.8vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+  .hero-actions { justify-content: center; }
   .hero-figure { max-width: 420px; margin-inline: auto; }
   .hero-figure-full { display: none; }
   .about-hero {
@@ -1702,7 +1724,8 @@ a  { color: var(--green); }
 @media (max-width: 900px) {
   .hero-review {
     position: static;
-    width: min(100%, 420px);
+    width: min(92%, 420px);
+    text-align: center;
     margin: 1.1rem auto 0;
   }
 }
