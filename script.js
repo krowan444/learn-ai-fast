@@ -79,6 +79,11 @@ const ENQUIRY_URL = "https://sktwwjvbpaqvmokhnjeh.supabase.co/functions/v1/enqui
 
 const form = document.querySelector("#contactForm");
 if (form) {
+  const talkChoices = { stuck: "From Stuck to Started", safety: "AI Safety Without the Jargon" };
+  const requestedTalk = talkChoices[new URLSearchParams(location.search).get("talk")];
+  if (requestedTalk && form.dataset.enquiryContext && form.elements.namedItem("topic")) {
+    form.elements.namedItem("topic").value = requestedTalk;
+  }
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = form.querySelector("button[type=submit]");
@@ -91,10 +96,14 @@ if (form) {
        enquiry service keeps working unchanged */
     const topic = form.topic ? form.topic.value : "";
     const phone = form.phone ? form.phone.value.trim() : "";
+    const groupDetails = Array.from(form.querySelectorAll("[data-enquiry-label]"))
+      .map(field => field.value.trim() ? field.dataset.enquiryLabel + ": " + field.value.trim() : "")
+      .filter(Boolean);
     const extras = [
       topic ? `Enquiry type: ${topic}` : "",
       phone ? `Phone: ${phone}` : "",
-      context || ""
+      context || "",
+      ...groupDetails
     ].filter(Boolean).join("\n");
     const fullMessage = extras ? `${extras}\n\n${message}` : message;
     if (!name || !email || !message) return;
